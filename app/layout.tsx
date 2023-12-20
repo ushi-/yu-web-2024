@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import classNames from "classnames";
+
 import "./globals.css";
 
 const authentic = localFont({
@@ -41,7 +43,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${authentic.variable} ${authenticCondensed.variable} font-sans`}
+        className={classNames(
+          "min-h-screen font-sans",
+          authentic.variable,
+          authenticCondensed.variable
+        )}
       >
         {children}
       </body>

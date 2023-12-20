@@ -12,6 +12,9 @@ const config: Config = {
         sans: ["var(--font-authentic)", "sans-serif"],
         condensed: ["var(--font-authentic-condensed)", "sans-serif"],
       },
+      spacing: {
+        "7.5": "1.875rem",
+      },
     },
   },
   plugins: [],

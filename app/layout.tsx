@@ -26,6 +26,11 @@ const authenticCondensed = localFont({
       weight: "400",
       style: "normal",
     },
+    {
+      path: "./fonts/AUTHENTICSans-Condensed-130.woff2",
+      weight: "700",
+      style: "normal",
+    },
   ],
   variable: "--font-authentic-condensed",
 });

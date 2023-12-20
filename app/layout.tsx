@@ -49,7 +49,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={classNames(
-          "min-h-screen font-sans",
+          "min-h-screen font-sans text-base text-foreground bg-background",
           authentic.variable,
           authenticCondensed.variable
         )}

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import classNames from "classnames";
 
+import { cn } from "@/lib/utils";
 import "./globals.css";
 
 const authentic = localFont({
@@ -48,8 +48,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={classNames(
-          "min-h-screen font-sans text-base text-foreground bg-background",
+        className={cn(
+          "min-h-screen font-sans text-base",
           authentic.variable,
           authenticCondensed.variable
         )}

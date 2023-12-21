@@ -1,15 +1,32 @@
-import { getProjects, getProject, type Project } from "@/lib/projects";
+import { allProjects } from "contentlayer/generated";
+import { notFound } from "next/navigation";
+import { useMDXComponent, getMDXComponent } from "next-contentlayer/hooks";
 
-export async function generateStaticParams() {
-  const posts = await getProjects();
-  return posts.map((post: Project) => ({
-    slug: post.slug,
-  }));
-}
+export const generateStaticParams = async () =>
+  allProjects.map((post) => ({ slug: post.slug }));
+
+export const generateMetadata = ({ params }: { params: { slug: string } }) => {
+  const post = allProjects.find((post) => post.slug === params.slug);
+  if (!post) throw new Error(`Post not found for slug: ${params.slug}`);
+  return { title: post.title };
+};
 
 export default async function Page({ params }: { params: { slug: string } }) {
-  const { slug } = params;
-  const project = await getProject(slug);
+  // Find the post for the current page.
+  const post = allProjects.find((post) => post.slug === params.slug);
 
-  return <div>My Post: {project ? project.title : "undefined"}</div>;
+  // 404 if the post does not exist.
+  if (!post) notFound();
+
+  console.log(post);
+
+  // Parse the MDX file via the useMDXComponent hook.
+  const MDXContent = getMDXComponent(post.body.code);
+
+  return (
+    <div>
+      {/* Some code ... */}
+      <MDXContent />
+    </div>
+  );
 }

@@ -8,11 +8,18 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    screens: {
+      sm: "375px",
+      md: "576px",
+      lg: "768px",
+      xl: "1280px",
+    },
     fontSize: {
       base: ["1rem", { lineHeight: "1.25" }],
-      lg: ["1.5rem", { lineHeight: "1.25" }],
-      xl: ["2rem", { lineHeight: "1.25" }],
-      "2xl": ["3rem", { lineHeight: "1.25" }],
+      lg: ["1.25rem", { lineHeight: "1.25" }],
+      xl: ["1.5rem", { lineHeight: "1.25" }],
+      "2xl": ["2rem", { lineHeight: "1.25" }],
+      "3xl": ["3rem", { lineHeight: "1.25" }],
     },
     container: {
       center: true,
@@ -27,6 +34,7 @@ const config: Config = {
         condensed: ["var(--font-authentic-condensed)", "sans-serif"],
       },
       spacing: {
+        "6.25": "1.5625rem",
         "7.5": "1.875rem",
       },
       colors: {

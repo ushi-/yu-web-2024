@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 
 import { cn } from "@/lib/utils";
 import "./globals.css";
+import Header from "@/components/header";
 
 const authentic = localFont({
   src: [
@@ -49,7 +50,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          "min-h-screen font-sans text-base",
+          "min-h-screen font-sans text-base flex flex-col",
           authentic.variable,
           authenticCondensed.variable
         )}

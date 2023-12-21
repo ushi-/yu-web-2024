@@ -18,8 +18,6 @@ export default async function Page({ params }: { params: { slug: string } }) {
   // 404 if the post does not exist.
   if (!post) notFound();
 
-  console.log(post);
-
   // Parse the MDX file via the useMDXComponent hook.
   const MDXContent = getMDXComponent(post.body.code);
 

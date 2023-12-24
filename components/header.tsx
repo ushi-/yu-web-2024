@@ -4,7 +4,6 @@ import { H3 } from "@/components/ui/typography";
 import {
   Card,
   CardContentContainer,
-  CardFooter,
   CardPrimaryContent,
   CardPrimaryContentContainer,
   CardSecondaryContent,
@@ -28,25 +27,22 @@ const Header = ({ anchors }: HeaderProps) => {
             <CardPrimaryContentContainer>
               <CardPrimaryContent>
                 <Link href="/">
-                  <H3 className="inline">yosukeushigo.me</H3>
+                  <H3 className="inline font-bold">yosukeushigo.me</H3>
                 </Link>
               </CardPrimaryContent>
               <CardPrimaryContent>
                 {anchors && anchors.length > 0 && (
                   <Link href={anchors[0].href}>
-                    <H3 className="inline">{anchors[0].label}</H3>
+                    <H3 className="inline font-bold">{anchors[0].label}</H3>
                   </Link>
                 )}
               </CardPrimaryContent>
             </CardPrimaryContentContainer>
-            <CardFooter>
-              <div className="w-full p-5 bg-primary" />
-            </CardFooter>
           </CardContentContainer>
           <CardSecondaryContent>
             {anchors && anchors.length > 1 && (
               <Link href={anchors[1].href}>
-                <H3 className="inline">{anchors[1].label}</H3>
+                <H3 className="inline font-bold">{anchors[1].label}</H3>
               </Link>
             )}
           </CardSecondaryContent>

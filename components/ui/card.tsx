@@ -8,10 +8,7 @@ const Card = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn(
-      "p-2.5 lg:p-5 flex flex-col lg:flex-row gap-2.5 lg:gap-5",
-      className
-    )}
+    className={cn("p-2.5 lg:p-5 flex flex-col lg:flex-row gap-5", className)}
     {...props}
   />
 ));
@@ -24,7 +21,7 @@ const CardContentContainer = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "flex-[2_2_20px] lg:flex-[2_2_20px] flex flex-col",
+      "flex-[2_2_10px] lg:flex-[2_2_20px] flex flex-col",
       className
     )}
     {...props}
@@ -48,7 +45,7 @@ const CardPrimaryContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("flex-1 bg-slate-200", className)} {...props} />
+  <div ref={ref} className={cn("flex-1", className)} {...props} />
 ));
 CardPrimaryContent.displayName = "CardPrimaryContent";
 
@@ -56,11 +53,7 @@ const CardSecondaryContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("flex-[1_1_0%] bg-slate-600", className)}
-    {...props}
-  />
+  <div ref={ref} className={cn("flex-[1_1_0%]", className)} {...props} />
 ));
 CardSecondaryContent.displayName = "CardSecondaryContent";
 

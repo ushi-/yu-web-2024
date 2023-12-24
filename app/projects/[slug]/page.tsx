@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getMDXComponent } from "next-contentlayer/hooks";
 
 import Header from "@/components/header";
+import { mdxComponents } from "@/components/mdxComponents";
 
 export const generateStaticParams = async () =>
   allProjects.map((post) => ({ slug: post.slug }));
@@ -27,7 +28,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
     <>
       <Header anchors={[{ label: "projects", href: "/projects" }]} />
       {/* Some code ... */}
-      <MDXContent />
+      <MDXContent components={mdxComponents} />
     </>
   );
 }

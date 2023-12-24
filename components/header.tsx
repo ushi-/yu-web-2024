@@ -4,6 +4,7 @@ import { H3 } from "@/components/ui/typography";
 import {
   Card,
   CardContentContainer,
+  CardFooter,
   CardPrimaryContent,
   CardPrimaryContentContainer,
   CardSecondaryContent,

@@ -60,8 +60,18 @@ CardSecondaryContent.displayName = "CardSecondaryContent";
 const CardFooter = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn("", className)} {...props} />
+>(({ className, children, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      "flex gap-2 items-center text-primary font-condensed",
+      className
+    )}
+    {...props}
+  >
+    {children && <div className="flex-1 bg-primary h-[1px]" />}
+    {children}
+  </div>
 ));
 CardFooter.displayName = "CardFooter";
 

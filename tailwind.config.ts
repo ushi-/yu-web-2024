@@ -20,6 +20,11 @@ const config: Config = {
       xl: ["1.5rem", { lineHeight: "1.25" }],
       "2xl": ["2rem", { lineHeight: "1.25" }],
       "3xl": ["3rem", { lineHeight: "1.25" }],
+      "base-ja": ["0.875rem", { lineHeight: "1.25rem" }],
+      "lg-ja": ["1.09375rem", { lineHeight: "1.5625rem" }],
+      "xl-ja": ["1.3125rem", { lineHeight: "1.875rem" }],
+      "2xl-ja": ["1.75rem", { lineHeight: "2.1875rem" }],
+      "3xl-ja": ["2.625rem", { lineHeight: "3.28125rem" }],
     },
     container: {
       center: true,
@@ -32,6 +37,14 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-authentic)", "sans-serif"],
         condensed: ["var(--font-authentic-condensed)", "sans-serif"],
+        ja: [
+          "Hiragino Sans",
+          "Hiragino Kaku Gothic Pro",
+          "Yu Gothic",
+          "YuGothic",
+          "Meiryo",
+          "sans-serif",
+        ],
       },
       spacing: {
         "6.25": "1.5625rem",

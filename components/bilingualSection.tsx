@@ -15,9 +15,7 @@ const BilingualSection = ({ children }: { children: React.ReactNode }) => {
       <CardContentContainer>
         <CardPrimaryContentContainer>
           <CardPrimaryContent>{englishContent}</CardPrimaryContent>
-          <CardPrimaryContent className="text-ja">
-            {japaneseContent}
-          </CardPrimaryContent>
+          <CardPrimaryContent>{japaneseContent}</CardPrimaryContent>
         </CardPrimaryContentContainer>
       </CardContentContainer>
       <CardSecondaryContent className="font-condensed">

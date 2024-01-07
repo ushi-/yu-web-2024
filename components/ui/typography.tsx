@@ -1,19 +1,29 @@
 import * as React from "react";
+import { franc } from "franc";
+
 import { cn } from "@/lib/utils";
 
 export const H1 = React.forwardRef<
   HTMLHeadingElement,
   React.ComponentProps<"h1">
->(({ className, ...props }, ref) => (
-  <h1
-    className={cn(
-      "scroll-m-20 text-base md:text-lg lg:text-xl xl:text-2xl",
-      className
-    )}
-    ref={ref}
-    {...props}
-  />
-));
+>(({ className, children, ...props }, ref) => {
+  let lang = franc(children as string, { minLength: 3, only: ["eng", "jpn"] });
+  return (
+    <h1
+      className={cn(
+        "scroll-m-20",
+        lang === "eng" && "text-base md:text-lg lg:text-xl xl:text-2xl",
+        lang === "jpn" &&
+          "text-base-ja md:text-lg-ja lg:text-xl-ja xl:text-2xl-ja font-ja font-medium",
+        className
+      )}
+      ref={ref}
+      {...props}
+    >
+      {children}
+    </h1>
+  );
+});
 H1.displayName = "H1";
 
 export const H2 = React.forwardRef<

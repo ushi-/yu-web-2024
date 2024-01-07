@@ -18,9 +18,7 @@ const PageSection = ({ page }: { page: Page }) => (
     <CardContentContainer>
       <CardPrimaryContentContainer>
         <CardPrimaryContent>{page.linkTextsEn[0]}</CardPrimaryContent>
-        <CardPrimaryContent className="text-ja">
-          {page.linkTextsJa[0]}
-        </CardPrimaryContent>
+        <CardPrimaryContent>{page.linkTextsJa[0]}</CardPrimaryContent>
       </CardPrimaryContentContainer>
       <CardFooter>
         <Link href={page.slug}> {page.title}</Link>

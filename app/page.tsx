@@ -1,39 +1,43 @@
 import Link from "next/link";
 import { compareDesc, format, parseISO } from "date-fns";
-import { allProjects, Project } from "contentlayer/generated";
+import { allPages, Page } from "contentlayer/generated";
 
 import { H1 } from "@/components/ui/typography";
 import Header from "@/components/header";
+import {
+  Card,
+  CardContentContainer,
+  CardPrimaryContent,
+  CardPrimaryContentContainer,
+  CardSecondaryContent,
+  CardFooter,
+} from "@/components/ui/card";
 
-function PostCard(post: Project) {
-  return (
-    <div className="mb-8">
-      <h2 className="mb-1 text-xl">
-        <Link
-          href={post.url}
-          className="text-blue-700 hover:text-blue-900 dark:text-blue-400"
-        >
-          {post.title}
-        </Link>
-      </h2>
-      <time dateTime={post.date} className="mb-2 block text-xs text-gray-600">
-        {format(parseISO(post.date), "LLLL d, yyyy")}
-      </time>
-    </div>
-  );
-}
+const PageSection = ({ page }: { page: Page }) => (
+  <Card>
+    <CardContentContainer>
+      <CardPrimaryContentContainer>
+        <CardPrimaryContent>{page.linkTextsEn[0]}</CardPrimaryContent>
+        <CardPrimaryContent className="text-ja">
+          {page.linkTextsJa[0]}
+        </CardPrimaryContent>
+      </CardPrimaryContentContainer>
+      <CardFooter>
+        <Link href={page.slug}> {page.title}</Link>
+      </CardFooter>
+    </CardContentContainer>
+    <CardSecondaryContent />
+  </Card>
+);
 
 export default function Home() {
-  const posts = allProjects.sort((a, b) =>
-    compareDesc(new Date(a.date), new Date(b.date))
-  );
+  const pages = allPages.sort((a, b) => a.order - b.order);
 
   return (
     <>
       <Header />
-      <H1>Next.js + Contentlayer Example</H1>
-      {posts.map((post, idx) => (
-        <PostCard key={idx} {...post} />
+      {pages.map((page, idx) => (
+        <PageSection key={idx} page={page} />
       ))}
     </>
   );

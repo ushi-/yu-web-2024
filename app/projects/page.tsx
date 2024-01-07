@@ -1,36 +1,40 @@
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
+import Link from "next/link";
+import { compareDesc, format, parseISO } from "date-fns";
+import { allProjects, Project } from "contentlayer/generated";
 
-export async function generateStaticParams() {
-  // 1) Set blogs directory
-  const blogDir = "blogs";
+import { H1 } from "@/components/ui/typography";
+import Header from "@/components/header";
 
-  // 2) Find all files in the blog directory
-  const files = fs.readdirSync(path.join(blogDir));
-
-  // 3) For each blog found
-  const blogs = files.map((filename) => {
-    // 4) Read the content of that blog
-    const fileContent = fs.readFileSync(path.join(blogDir, filename), "utf-8");
-
-    // 5) Extract the metadata from the blog's content
-    const { data: frontMatter } = matter(fileContent);
-
-    // 6) Return the metadata and page slug
-    return {
-      meta: frontMatter,
-      slug: filename.replace(".mdx", ""),
-    };
-  });
-
-  const posts = await fetch("https://.../posts").then((res) => res.json());
-
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
+function PostCard(post: Project) {
+  return (
+    <div className="mb-8">
+      <h2 className="mb-1 text-xl">
+        <Link
+          href={post.url}
+          className="text-blue-700 hover:text-blue-900 dark:text-blue-400"
+        >
+          {post.title}
+        </Link>
+      </h2>
+      <time dateTime={post.date} className="mb-2 block text-xs text-gray-600">
+        {format(parseISO(post.date), "LLLL d, yyyy")}
+      </time>
+    </div>
+  );
 }
 
-export default function Page({ params }: { params: { slug: string } }) {
-  return <div>My Post: {params.slug}</div>;
+export default function Home() {
+  const posts = allProjects.sort((a, b) =>
+    compareDesc(new Date(a.date), new Date(b.date))
+  );
+
+  return (
+    <>
+      <Header />
+      <H1>Next.js + Contentlayer Example</H1>
+      {posts.map((post, idx) => (
+        <PostCard key={idx} {...post} />
+      ))}
+    </>
+  );
 }

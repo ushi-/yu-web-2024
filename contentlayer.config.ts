@@ -1,5 +1,6 @@
 import { defineDocumentType, makeSource } from "contentlayer/source-files";
 import slugify from "slugify";
+import { format } from "date-fns";
 
 export const Project = defineDocumentType(() => ({
   name: "Project",
@@ -8,6 +9,8 @@ export const Project = defineDocumentType(() => ({
   fields: {
     title: { type: "string", required: true },
     date: { type: "date", required: true },
+    taglineEn: { type: "string", required: true },
+    taglineJa: { type: "string", required: true },
   },
   computedFields: {
     url: {
@@ -17,6 +20,10 @@ export const Project = defineDocumentType(() => ({
     slug: {
       type: "string",
       resolve: (post) => slugify(post.title, { lower: true }),
+    },
+    year: {
+      type: "string",
+      resolve: (post) => format(new Date(post.date), "yyyy"),
     },
   },
 }));

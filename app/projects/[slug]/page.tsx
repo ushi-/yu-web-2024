@@ -4,6 +4,8 @@ import { getMDXComponent } from "next-contentlayer/hooks";
 
 import Header from "@/components/header";
 import { mdxComponents } from "@/components/mdxComponents";
+import BilingualSection from "@/components/bilingualSection";
+import { H1, H3 } from "@/components/ui/typography";
 
 export const generateStaticParams = async () =>
   allProjects.map((post) => ({ slug: post.slug }));
@@ -27,7 +29,13 @@ export default async function Page({ params }: { params: { slug: string } }) {
   return (
     <>
       <Header anchors={[{ label: "projects", href: "/projects" }]} />
-      {/* Some code ... */}
+      <BilingualSection>
+        <H1>{post.taglineEn}</H1>
+        <H1>{post.taglineJa}</H1>
+        <div>
+          <H3>{`${post.title}, ${post.year}`}</H3>
+        </div>
+      </BilingualSection>
       <MDXContent components={mdxComponents} />
     </>
   );

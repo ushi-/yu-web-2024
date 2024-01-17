@@ -25,7 +25,9 @@ const PageSection = ({ page }: { page: Page }) => (
         </CardPrimaryContent>
       </CardPrimaryContentContainer>
       <CardFooter>
-        <Link href={page.slug}> {page.title}</Link>
+        <Link href={page.slug} className="lg:text-xl xl:text-2xl">
+          {page.title}
+        </Link>
       </CardFooter>
     </CardContentContainer>
     <CardSecondaryContent />

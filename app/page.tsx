@@ -1,11 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
 import { allPages, Page } from "contentlayer/generated";
-import { ArrowRight, Plus } from "lucide-react";
+import { getMDXComponent } from "next-contentlayer/hooks";
 
-import { H1 } from "@/components/ui/typography";
+import { H1, Hero } from "@/components/ui/typography";
 import Header from "@/components/header";
 import {
   Card,
@@ -13,56 +12,72 @@ import {
   CardPrimaryContent,
   CardPrimaryContentContainer,
   CardSecondaryContent,
-  CardFooter,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { heroMdxComponents } from "@/components/mdxComponents";
 
-const PageSection = ({ page }: { page: Page }) => {
-  const [linkTextIndex, setLinkTextIndex] = useState(0);
-  const linkTextEn = page.linkTextsEn.slice(0, linkTextIndex + 1).join(" ");
-  const linkTextJa = page.linkTextsJa.slice(0, linkTextIndex + 1).join("");
-  return (
-    <Card>
-      <CardContentContainer>
-        <CardPrimaryContentContainer>
-          <CardPrimaryContent>
-            <H1>{linkTextEn}</H1>
-          </CardPrimaryContent>
-          <CardPrimaryContent>
-            <H1>{linkTextJa}</H1>
-          </CardPrimaryContent>
-        </CardPrimaryContentContainer>
-        <CardFooter>
-          <div className="lg:text-xl xl:text-2xl">
-            {linkTextIndex < page.linkTextsEn.length - 1 ? (
-              <Button
-                variant="ghost"
-                onClick={() => {
-                  setLinkTextIndex((index) => index + 1);
-                }}
-              >
-                {page.title}
-              </Button>
-            ) : (
-              <Link href={page.slug}>{page.title}</Link>
-            )}
-          </div>
-        </CardFooter>
-      </CardContentContainer>
-      <CardSecondaryContent />
-    </Card>
-  );
-};
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   const pages = allPages.sort((a, b) => a.order - b.order);
+  const [linkTextIndeces, setLinkTextIndeces] = useState(
+    new Array(pages.length).fill(0)
+  );
 
   return (
     <>
       <Header />
-      {pages.map((page, idx) => (
-        <PageSection key={idx} page={page} />
-      ))}
+      <Card>
+        <CardContentContainer>
+          <CardPrimaryContentContainer>
+            <CardPrimaryContent>
+              {pages.map((page, pageIndex) => {
+                const currentLinkTextIndex = linkTextIndeces[pageIndex];
+                return (
+                  <>
+                    {page.linkTextsEn
+                      .filter(
+                        (linkText, textIndex) =>
+                          textIndex <= currentLinkTextIndex
+                      )
+                      .map((linkText, textIndex) => {
+                        const MDXContent = getMDXComponent(linkText.code);
+                        return (
+                          <>
+                            <MDXContent
+                              key={pageIndex * 10 + textIndex}
+                              components={heroMdxComponents}
+                            />
+                            <Hero> </Hero>
+                          </>
+                        );
+                      })}
+                    <Button
+                      onClick={() => {
+                        setLinkTextIndeces((prev) =>
+                          prev.map((prevValue, prevIndex) =>
+                            prevIndex === pageIndex
+                              ? Math.min(
+                                  pages[pageIndex].linkTextsEn.length - 1,
+                                  prevValue + 1
+                                )
+                              : prevValue
+                          )
+                        );
+                      }}
+                    >
+                      Button
+                    </Button>
+                    <Hero> </Hero>
+                  </>
+                );
+              })}
+            </CardPrimaryContent>
+            <CardPrimaryContent></CardPrimaryContent>
+          </CardPrimaryContentContainer>
+        </CardContentContainer>
+        <CardSecondaryContent />
+      </Card>
     </>
   );
 }

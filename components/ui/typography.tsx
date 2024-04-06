@@ -104,6 +104,28 @@ export const P = React.forwardRef<
 });
 P.displayName = "P";
 
+export const Hero = React.forwardRef<
+  HTMLSpanElement,
+  React.ComponentProps<"span">
+>(({ className, children, ...props }, ref) => {
+  let lang = detectLang(children);
+  return (
+    <span
+      className={cn(
+        lang === "eng" && "text-base md:text-lg lg:text-xl xl:text-2xl",
+        lang === "jpn" &&
+          "text-base-ja md:text-lg-ja lg:text-xl-ja xl:text-2xl-ja font-ja font-medium",
+        className
+      )}
+      ref={ref}
+      {...props}
+    >
+      {children}
+    </span>
+  );
+});
+Hero.displayName = "Hero";
+
 export const Blockquote = React.forwardRef<
   HTMLQuoteElement,
   React.ComponentProps<"blockquote">

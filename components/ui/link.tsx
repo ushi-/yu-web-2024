@@ -11,7 +11,10 @@ const MyLink = React.forwardRef<HTMLAnchorElement, myLinkProps>(
     return (
       <Link
         href={href}
-        className={cn("text-primary hover:text-primary/80", className)}
+        className={cn(
+          "text-primary hover:text-primary/80 transition-colors",
+          className
+        )}
         {...props}
         ref={ref}
       />

@@ -63,9 +63,7 @@ export default function Home() {
                           )
                         );
                       }}
-                    >
-                      Button
-                    </Button>
+                    ></Button>
                     <Hero> </Hero>
                   </React.Fragment>
                 );

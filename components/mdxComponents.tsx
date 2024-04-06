@@ -1,8 +1,7 @@
 import type { MDXComponents } from "mdx/types";
-import Link from "next/link";
 
 import { H1, H2, H3, H4, P, Hero } from "@/components/ui/typography";
-import { cn } from "@/lib/utils";
+import { Link } from "@/components/ui/link";
 
 export const mdxComponents: MDXComponents = {
   h1: ({ children }) => <H1>{children}</H1>,
@@ -14,6 +13,6 @@ export const mdxComponents: MDXComponents = {
 };
 
 export const heroMdxComponents: MDXComponents = {
-  p: ({ children }) => <Hero className={cn("inline")}>{children}</Hero>,
+  p: ({ children }) => <Hero>{children}</Hero>,
   a: ({ href, children }) => <Link href={href as string}>{children}</Link>,
 };

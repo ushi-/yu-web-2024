@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { allPages, Page } from "contentlayer/generated";
 import { getMDXComponent } from "next-contentlayer/hooks";
+import React from "react";
 
 import { H1, Hero } from "@/components/ui/typography";
 import Header from "@/components/header";
@@ -34,7 +35,7 @@ export default function Home() {
               {pages.map((page, pageIndex) => {
                 const currentLinkTextIndex = linkTextIndeces[pageIndex];
                 return (
-                  <>
+                  <React.Fragment key={pageIndex}>
                     {page.linkTextsEn
                       .filter(
                         (linkText, textIndex) =>
@@ -43,13 +44,10 @@ export default function Home() {
                       .map((linkText, textIndex) => {
                         const MDXContent = getMDXComponent(linkText.code);
                         return (
-                          <>
-                            <MDXContent
-                              key={pageIndex * 10 + textIndex}
-                              components={heroMdxComponents}
-                            />
+                          <React.Fragment key={pageIndex * 10 + textIndex}>
+                            <MDXContent components={heroMdxComponents} />
                             <Hero> </Hero>
-                          </>
+                          </React.Fragment>
                         );
                       })}
                     <Button
@@ -69,7 +67,7 @@ export default function Home() {
                       Button
                     </Button>
                     <Hero> </Hero>
-                  </>
+                  </React.Fragment>
                 );
               })}
             </CardPrimaryContent>

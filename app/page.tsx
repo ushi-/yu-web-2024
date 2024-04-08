@@ -1,9 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import { allPages, Page } from "contentlayer/generated";
+import React, { useState } from "react";
+import { allPages } from "contentlayer/generated";
 import { getMDXComponent } from "next-contentlayer/hooks";
-import React from "react";
 
 import { Hero } from "@/components/ui/typography";
 import Header from "@/components/header";
@@ -17,6 +16,7 @@ import {
 import { heroMdxComponents } from "@/components/mdxComponents";
 
 import { Button } from "@/components/ui/button";
+import { Link } from "@/components/ui/link";
 
 export default function Home() {
   const pages = allPages.sort((a, b) => a.order - b.order);
@@ -33,6 +33,8 @@ export default function Home() {
             <CardPrimaryContent>
               {pages.map((page, pageIndex) => {
                 const currentSegmentIndex = segmentIndeces[pageIndex];
+                const expanded =
+                  currentSegmentIndex >= page.heroTextSegmentsEn.length - 1;
                 return (
                   <React.Fragment key={pageIndex}>
                     {page.heroTextSegmentsEn
@@ -49,25 +51,29 @@ export default function Home() {
                           </React.Fragment>
                         );
                       })}
-                    <Button
-                      onClick={() => {
-                        setSegmentIndeces((prev) =>
-                          prev.map((prevValue, prevIndex) =>
-                            prevIndex === pageIndex
-                              ? Math.min(
-                                  pages[pageIndex].heroTextSegmentsEn.length -
-                                    1,
-                                  prevValue + 1
-                                )
-                              : prevValue
-                          )
-                        );
-                      }}
-                    >
-                      {currentSegmentIndex >=
-                        page.heroTextSegmentsEn.length - 1 &&
-                        page.title.toUpperCase()}
-                    </Button>
+                    {expanded ? (
+                      <Button>
+                        <Link
+                          href={page.url}
+                          className=" text-primary-foreground hover:text-primaryry-foreground"
+                        >
+                          {page.title.toUpperCase()}
+                        </Link>
+                      </Button>
+                    ) : (
+                      <Button
+                        variant="dot"
+                        onClick={() => {
+                          setSegmentIndeces((prev) =>
+                            prev.map((prevValue, prevIndex) =>
+                              prevIndex === pageIndex
+                                ? prevValue + 1
+                                : prevValue
+                            )
+                          );
+                        }}
+                      />
+                    )}
                     <Hero> </Hero>
                   </React.Fragment>
                 );

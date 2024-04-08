@@ -5,16 +5,27 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline items-center justify-center whitespace-nowrap text-sm font-condensed ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 ",
+  cn(
+    "inline items-center justify-center whitespace-nowrap",
+    "font-condensed",
+    "rounded-full",
+    "h-4 md:h-5 lg:h-6 xl:h-8",
+    "bg-primary text-primary-foreground",
+    "hover:bg-primary/90 ",
+    "transition-colors",
+    "disabled:pointer-events-none disabled:opacity-50",
+    "ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+  ),
   {
     variants: {
       variant: {
-        default: "h-4 w-4 lg:h-6 lg:w-6 xl:h-8 xl:w-8",
-        dot: "-mt-8 h-4 w-4 translate-y-[2px] md:h-5 md:w-5 md:translate-y-[2.5px] lg:h-6 lg:w-6 lg:translate-y-[3px] xl:h-8 xl:w-8 xl:translate-y-[4px]",
+        default:
+          "px-2 md:px-2.5 lg:px-3 xl:px-4 text-sm md:text-base lg:text-lg xl:text-xl",
+        dot: "-mt-8 w-4 translate-y-[2px] md:w-5 md:translate-y-[2.5px] lg:w-6 lg:translate-y-[3px] xl:w-8 xl:translate-y-[4px]",
       },
     },
     defaultVariants: {
-      variant: "dot",
+      variant: "default",
     },
   }
 );

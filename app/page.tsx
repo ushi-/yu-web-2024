@@ -13,16 +13,25 @@ import {
   CardPrimaryContentContainer,
   CardSecondaryContent,
 } from "@/components/ui/card";
-import { heroMdxComponents } from "@/components/mdxComponents";
 
 import { Button } from "@/components/ui/button";
 import { Link } from "@/components/ui/link";
 
+type HeroSegmentProps = {
+  mdxCode: string;
+};
+
+const HeroSegment = ({ mdxCode }: HeroSegmentProps) => {};
+
 export default function Home() {
   const pages = allPages.sort((a, b) => a.order - b.order);
-  const [segmentIndeces, setSegmentIndeces] = useState(
+  const [segmentIndeces, setSegmentIndeces] = useState<number[]>(
     new Array(pages.length).fill(0)
   );
+  const [segmentLengths, setSegmentLengths] = useState<number[]>(
+    new Array(pages.length).fill(0)
+  );
+  const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
 
   return (
     <>
@@ -33,6 +42,7 @@ export default function Home() {
             <CardPrimaryContent>
               {pages.map((page, pageIndex) => {
                 const currentSegmentIndex = segmentIndeces[pageIndex];
+                const currentSegmentLength = segmentLengths[pageIndex];
                 const expanded =
                   currentSegmentIndex >= page.heroTextSegmentsEn.length - 1;
                 return (
@@ -46,7 +56,24 @@ export default function Home() {
                         const MDXContent = getMDXComponent(segment.code);
                         return (
                           <React.Fragment key={pageIndex * 10 + segmentIndex}>
-                            <MDXContent components={heroMdxComponents} />
+                            <MDXContent
+                              components={{
+                                p: ({ children }) => (
+                                  <Hero
+                                    length={
+                                      segmentIndex === 0
+                                        ? 1000
+                                        : currentSegmentLength
+                                    }
+                                  >
+                                    {children}
+                                  </Hero>
+                                ),
+                                a: ({ href, children }) => (
+                                  <Link href={href as string}>{children}</Link>
+                                ),
+                              }}
+                            />
                             <Hero> </Hero>
                           </React.Fragment>
                         );
@@ -64,6 +91,25 @@ export default function Home() {
                       <Button
                         variant="dot"
                         onClick={() => {
+                          if (timeoutRef.current) {
+                            clearInterval(timeoutRef.current);
+                          }
+                          timeoutRef.current = setInterval(() => {
+                            setSegmentLengths((prev) => {
+                              if (
+                                currentSegmentLength >= page.maxSegmentLength
+                              ) {
+                                clearInterval(
+                                  timeoutRef.current as NodeJS.Timeout
+                                );
+                              }
+                              return prev.map((prevValue, prevIndex) =>
+                                prevIndex === pageIndex
+                                  ? prevValue + 1
+                                  : prevValue
+                              );
+                            });
+                          }, 15);
                           setSegmentIndeces((prev) =>
                             prev.map((prevValue, prevIndex) =>
                               prevIndex === pageIndex

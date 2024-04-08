@@ -47,6 +47,20 @@ export const Page = defineDocumentType(() => ({
       type: "string",
       resolve: (post) => slugify(post.title, { lower: true }),
     },
+    maxSegmentLength: {
+      type: "number",
+      resolve: (post) => {
+        return 1000;
+        // return Math.max(
+        //   post.heroTextSegmentsEn.reduce((acc, segment) => {
+        //     return acc + segment.raw.length;
+        //   }, 0),
+        //   post.heroTextSegmentsJa.reduce((acc, segment) => {
+        //     return acc + segment.raw.length;
+        //   }, 0)
+        // );
+      },
+    },
   },
 }));
 

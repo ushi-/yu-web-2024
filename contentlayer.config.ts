@@ -35,8 +35,8 @@ export const Page = defineDocumentType(() => ({
   fields: {
     title: { type: "string", required: true },
     order: { type: "number", required: true },
-    linkTextsEn: { type: "list", of: { type: "mdx" }, required: true },
-    linkTextsJa: { type: "list", of: { type: "mdx" }, required: true },
+    heroTextSegmentsEn: { type: "list", of: { type: "mdx" }, required: true },
+    heroTextSegmentsJa: { type: "list", of: { type: "mdx" }, required: true },
   },
   computedFields: {
     url: {

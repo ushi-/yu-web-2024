@@ -20,7 +20,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Home() {
   const pages = allPages.sort((a, b) => a.order - b.order);
-  const [linkTextIndeces, setLinkTextIndeces] = useState(
+  const [segmentIndeces, setSegmentIndeces] = useState(
     new Array(pages.length).fill(0)
   );
 
@@ -32,18 +32,18 @@ export default function Home() {
           <CardPrimaryContentContainer>
             <CardPrimaryContent>
               {pages.map((page, pageIndex) => {
-                const currentLinkTextIndex = linkTextIndeces[pageIndex];
+                const currentSegmentIndex = segmentIndeces[pageIndex];
                 return (
                   <React.Fragment key={pageIndex}>
-                    {page.linkTextsEn
+                    {page.heroTextSegmentsEn
                       .filter(
-                        (linkText, textIndex) =>
-                          textIndex <= currentLinkTextIndex
+                        (segment, segmentIndex) =>
+                          segmentIndex <= currentSegmentIndex
                       )
-                      .map((linkText, textIndex) => {
-                        const MDXContent = getMDXComponent(linkText.code);
+                      .map((segment, segmentIndex) => {
+                        const MDXContent = getMDXComponent(segment.code);
                         return (
-                          <React.Fragment key={pageIndex * 10 + textIndex}>
+                          <React.Fragment key={pageIndex * 10 + segmentIndex}>
                             <MDXContent components={heroMdxComponents} />
                             <Hero> </Hero>
                           </React.Fragment>
@@ -51,11 +51,12 @@ export default function Home() {
                       })}
                     <Button
                       onClick={() => {
-                        setLinkTextIndeces((prev) =>
+                        setSegmentIndeces((prev) =>
                           prev.map((prevValue, prevIndex) =>
                             prevIndex === pageIndex
                               ? Math.min(
-                                  pages[pageIndex].linkTextsEn.length - 1,
+                                  pages[pageIndex].heroTextSegmentsEn.length -
+                                    1,
                                   prevValue + 1
                                 )
                               : prevValue
@@ -63,7 +64,8 @@ export default function Home() {
                         );
                       }}
                     >
-                      {currentLinkTextIndex >= page.linkTextsEn.length - 1 &&
+                      {currentSegmentIndex >=
+                        page.heroTextSegmentsEn.length - 1 &&
                         page.title.toUpperCase()}
                     </Button>
                     <Hero> </Hero>

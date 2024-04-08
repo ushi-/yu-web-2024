@@ -5,7 +5,7 @@ import { allPages, Page } from "contentlayer/generated";
 import { getMDXComponent } from "next-contentlayer/hooks";
 import React from "react";
 
-import { H1, Hero } from "@/components/ui/typography";
+import { Hero } from "@/components/ui/typography";
 import Header from "@/components/header";
 import {
   Card,
@@ -16,7 +16,6 @@ import {
 } from "@/components/ui/card";
 import { heroMdxComponents } from "@/components/mdxComponents";
 
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
@@ -63,7 +62,10 @@ export default function Home() {
                           )
                         );
                       }}
-                    ></Button>
+                    >
+                      {currentLinkTextIndex >= page.linkTextsEn.length - 1 &&
+                        page.title.toUpperCase()}
+                    </Button>
                     <Hero> </Hero>
                   </React.Fragment>
                 );

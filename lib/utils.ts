@@ -54,3 +54,5 @@ export const sliceChildren = (
     });
   }
 };
+
+export type Language = "en" | "ja";

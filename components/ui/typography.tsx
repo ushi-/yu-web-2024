@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { cn, detectLang, sliceChildren } from "@/lib/utils";
+import { cn, detectLang, Language } from "@/lib/utils";
 
 export const H1 = React.forwardRef<
   HTMLHeadingElement,
@@ -10,10 +10,9 @@ export const H1 = React.forwardRef<
   return (
     <h1
       className={cn(
-        "scroll-m-20",
-        lang === "eng" && "text-base md:text-lg lg:text-xl xl:text-2xl",
+        "scroll-m-20 text-base md:text-lg lg:text-xl xl:text-2xl",
         lang === "jpn" &&
-          "text-base-ja md:text-lg-ja lg:text-xl-ja xl:text-2xl-ja font-ja font-medium",
+          "text-base-ja md:text-lg-ja lg:text-xl-ja xl:text-2xl-ja font-ja  font-semibold",
         className
       )}
       ref={ref}
@@ -33,10 +32,9 @@ export const H2 = React.forwardRef<
   return (
     <h2
       className={cn(
-        "scroll-m-20",
-        lang === "eng" && "text-base md:text-lg lg:text-xl xl:text-xl",
+        "scroll-m-20 text-base md:text-lg lg:text-xl xl:text-xl",
         lang === "jpn" &&
-          "text-base-ja md:text-lg-ja lg:text-xl-ja xl:text-xl-ja font-ja font-medium",
+          "text-base-ja md:text-lg-ja lg:text-xl-ja xl:text-xl-ja font-ja  font-semibold",
         className
       )}
       ref={ref}
@@ -68,8 +66,7 @@ export const H4 = React.forwardRef<
   return (
     <h4
       className={cn(
-        "scroll-m-20",
-        lang === "eng" && "text-base font-bold",
+        "scroll-m-20 text-base font-bold",
         lang === "jpn" && "text-base-ja font-ja font-bold",
         className
       )}
@@ -90,9 +87,8 @@ export const P = React.forwardRef<
   return (
     <p
       className={cn(
-        "[&:not(:first-child)]:mt-5",
-        lang === "eng" && "text-base",
-        lang === "jpn" && "text-base-ja font-ja font-medium",
+        "[&:not(:first-child)]:mt-5 text-base",
+        lang === "jpn" && "text-base-ja font-ja  font-semibold",
         className
       )}
       ref={ref}
@@ -117,24 +113,28 @@ export const Blockquote = React.forwardRef<
 Blockquote.displayName = "Blockquote";
 
 interface HeroProps extends React.ComponentProps<"span"> {
-  length?: number;
+  language?: Language;
 }
 
 export const Hero = React.forwardRef<HTMLSpanElement, HeroProps>(
-  ({ length = 1000, className, children, ...props }, ref) => {
-    let lang = detectLang(children);
+  ({ language, className, children, ...props }, ref) => {
+    let lang = language
+      ? language === "en"
+        ? "eng"
+        : "jpn"
+      : detectLang(children);
     return (
       <span
         className={cn(
-          lang === "eng" && "text-base md:text-lg lg:text-xl xl:text-2xl",
+          "text-base md:text-lg lg:text-xl xl:text-2xl",
           lang === "jpn" &&
-            "text-base-ja md:text-lg-ja lg:text-xl-ja xl:text-2xl-ja font-ja font-medium",
+            "text-base-ja md:text-lg-ja lg:text-xl-ja xl:text-2xl-ja font-ja  font-semibold",
           className
         )}
         ref={ref}
         {...props}
       >
-        {sliceChildren(children, length)}
+        {children}
       </span>
     );
   }

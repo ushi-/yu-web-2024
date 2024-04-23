@@ -35,8 +35,8 @@ export const Page = defineDocumentType(() => ({
   fields: {
     title: { type: "string", required: true },
     order: { type: "number", required: true },
-    heroTextSegmentsEn: { type: "list", of: { type: "mdx" }, required: true },
-    heroTextSegmentsJa: { type: "list", of: { type: "mdx" }, required: true },
+    heroTextEn: { type: "mdx", required: true },
+    heroTextJa: { type: "mdx", required: true },
   },
   computedFields: {
     url: {
@@ -46,20 +46,6 @@ export const Page = defineDocumentType(() => ({
     slug: {
       type: "string",
       resolve: (post) => slugify(post.title, { lower: true }),
-    },
-    maxSegmentLength: {
-      type: "number",
-      resolve: (post) => {
-        return 1000;
-        // return Math.max(
-        //   post.heroTextSegmentsEn.reduce((acc, segment) => {
-        //     return acc + segment.raw.length;
-        //   }, 0),
-        //   post.heroTextSegmentsJa.reduce((acc, segment) => {
-        //     return acc + segment.raw.length;
-        //   }, 0)
-        // );
-      },
     },
   },
 }));

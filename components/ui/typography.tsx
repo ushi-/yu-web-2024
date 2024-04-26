@@ -126,9 +126,8 @@ export const Hero = React.forwardRef<HTMLSpanElement, HeroProps>(
     return (
       <span
         className={cn(
-          "text-base xl:text-lg 2xl:text-xl",
-          lang === "jpn" &&
-            "text-base-ja xl:text-lg-ja 2xl:text-xl-ja font-ja  font-semibold",
+          "text-base",
+          lang === "jpn" && "text-base-ja font-ja  font-semibold",
           className
         )}
         ref={ref}

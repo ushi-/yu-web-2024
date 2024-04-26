@@ -34,10 +34,6 @@ export const Page = defineDocumentType(() => ({
   contentType: "mdx",
   fields: {
     title: { type: "string", required: true },
-    order: { type: "number", required: true },
-    heroTextEn: { type: "mdx", required: true },
-    heroTextJa: { type: "mdx", required: true },
-    image: { type: "string", required: false },
   },
   computedFields: {
     url: {

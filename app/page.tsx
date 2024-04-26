@@ -51,7 +51,23 @@ export default function Home() {
   return (
     <>
       <Header />
-      <Card className="flex-col-reverse lg:flex-row">
+      <Card className="p-0 lg:py-0">
+        {pages.map((page, pageIndex) => {
+          return page.image ? (
+            <React.Fragment key={pageIndex}>
+              <Image
+                key={pageIndex}
+                src={page.image}
+                alt={page.title}
+                width={1280}
+                height={720}
+                className="aspect-ratio-9/16"
+              />
+            </React.Fragment>
+          ) : null;
+        })}
+      </Card>
+      <Card>
         <CardContentContainer>
           <CardPrimaryContentContainer>
             <CardPrimaryContent>
@@ -62,21 +78,7 @@ export default function Home() {
             </CardPrimaryContent>
           </CardPrimaryContentContainer>
         </CardContentContainer>
-        <CardSecondaryContent>
-          {pages.map((page, pageIndex) => {
-            return page.image ? (
-              <React.Fragment key={pageIndex}>
-                <Image
-                  key={pageIndex}
-                  src={page.image}
-                  alt={page.title}
-                  width={1000}
-                  height={500}
-                />
-              </React.Fragment>
-            ) : null;
-          })}
-        </CardSecondaryContent>
+        <CardSecondaryContent></CardSecondaryContent>
       </Card>
     </>
   );

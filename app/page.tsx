@@ -64,15 +64,16 @@ export default function Home() {
         </CardContentContainer>
         <CardSecondaryContent>
           {pages.map((page, pageIndex) => {
-            return page.imageSrc ? (
-              <Image
-                key={pageIndex}
-                src={page.imageSrc}
-                alt={page.title}
-                width={1000}
-                height={500}
-                layout="responsive"
-              />
+            return page.image ? (
+              <React.Fragment key={pageIndex}>
+                <Image
+                  key={pageIndex}
+                  src={page.image}
+                  alt={page.title}
+                  width={1000}
+                  height={500}
+                />
+              </React.Fragment>
             ) : null;
           })}
         </CardSecondaryContent>

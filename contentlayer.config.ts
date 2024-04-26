@@ -48,13 +48,6 @@ export const Page = defineDocumentType(() => ({
       type: "string",
       resolve: (post) => slugify(post.title, { lower: true }),
     },
-    imageSrc: {
-      type: "string",
-      resolve: (post) =>
-        post.image
-          ? `/${slugify(post.title, { lower: true })}/${post.image}`
-          : null,
-    },
   },
 }));
 

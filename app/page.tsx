@@ -1,6 +1,7 @@
 import React from "react";
 import { allPages, Page } from "contentlayer/generated";
 import { getMDXComponent } from "next-contentlayer/hooks";
+import Image from "next/image";
 
 import { Hero } from "@/components/ui/typography";
 import Header from "@/components/header";
@@ -13,7 +14,7 @@ import {
 } from "@/components/ui/card";
 
 import { Link } from "@/components/ui/link";
-import { Language } from "@/lib/utils";
+import { cn, Language } from "@/lib/utils";
 
 interface HeroTextProps {
   pages: Page[];
@@ -50,7 +51,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <Card>
+      <Card className="flex-col-reverse lg:flex-row">
         <CardContentContainer>
           <CardPrimaryContentContainer>
             <CardPrimaryContent>
@@ -61,7 +62,20 @@ export default function Home() {
             </CardPrimaryContent>
           </CardPrimaryContentContainer>
         </CardContentContainer>
-        <CardSecondaryContent />
+        <CardSecondaryContent>
+          {pages.map((page, pageIndex) => {
+            return page.imageSrc ? (
+              <Image
+                key={pageIndex}
+                src={page.imageSrc}
+                alt={page.title}
+                width={1000}
+                height={500}
+                layout="responsive"
+              />
+            ) : null;
+          })}
+        </CardSecondaryContent>
       </Card>
     </>
   );

@@ -4,7 +4,7 @@ import { format } from "date-fns";
 
 export const Project = defineDocumentType(() => ({
   name: "Project",
-  filePathPattern: `projects/**/*.mdx`,
+  filePathPattern: `projects/*/*.mdx`,
   contentType: "mdx",
   fields: {
     title: { type: "string", required: true },
@@ -30,13 +30,14 @@ export const Project = defineDocumentType(() => ({
 
 export const Page = defineDocumentType(() => ({
   name: "Page",
-  filePathPattern: `*.mdx`,
+  filePathPattern: `**/index.mdx`,
   contentType: "mdx",
   fields: {
     title: { type: "string", required: true },
     order: { type: "number", required: true },
     heroTextEn: { type: "mdx", required: true },
     heroTextJa: { type: "mdx", required: true },
+    image: { type: "string", required: false },
   },
   computedFields: {
     url: {
@@ -46,6 +47,13 @@ export const Page = defineDocumentType(() => ({
     slug: {
       type: "string",
       resolve: (post) => slugify(post.title, { lower: true }),
+    },
+    imageSrc: {
+      type: "string",
+      resolve: (post) =>
+        post.image
+          ? `/${slugify(post.title, { lower: true })}/${post.image}`
+          : null,
     },
   },
 }));

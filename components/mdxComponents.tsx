@@ -12,11 +12,12 @@ export const mdxComponents: MDXComponents = {
   p: ({ children }) => <P>{children}</P>,
   a: ({ href, children }) => <Link href={href as string}>{children}</Link>,
   img: (props) => (
+    // eslint-disable-next-line jsx-a11y/alt-text
     <Image
       sizes="100vw"
       style={{ width: "100%", height: "auto" }}
-      width={800}
-      height={800}
+      width={1280}
+      height={1280}
       {...(props as ImageProps)}
     />
   ),

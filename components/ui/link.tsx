@@ -12,7 +12,7 @@ const MyLink = React.forwardRef<HTMLAnchorElement, myLinkProps>(
       <Link
         href={href}
         className={cn(
-          "text-primary hover:text-primary/80 transition-colors",
+          "text-primary hover:text-primary/70 transition-colors",
           className
         )}
         {...props}

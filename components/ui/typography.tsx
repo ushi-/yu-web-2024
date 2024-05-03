@@ -87,7 +87,7 @@ export const P = React.forwardRef<
   return (
     <p
       className={cn(
-        "[&:not(:first-child)]:mt-5 text-base",
+        "[&:not(:first-child)]:mt-5 text-base w-full",
         lang === "jpn" && "text-base-ja font-ja  font-semibold",
         className
       )}

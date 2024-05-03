@@ -20,7 +20,7 @@ const config: Config = {
       xl: ["24px", { lineHeight: "36px" }],
       "2xl": ["32px", { lineHeight: "48px" }],
       "3xl": ["48px", { lineHeight: "72px" }],
-      "base-ja": ["14px", { lineHeight: "22px" }],
+      "base-ja": ["14px", { lineHeight: "24px" }],
       "lg-ja": ["17.5px", { lineHeight: "30px" }],
       "xl-ja": ["21px", { lineHeight: "36px" }],
       "2xl-ja": ["28px", { lineHeight: "48px" }],

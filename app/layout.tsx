@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 
 import { cn } from "@/lib/utils";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const authentic = localFont({
   src: [
@@ -49,12 +50,19 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          "min-h-screen font-sans text-base flex flex-col max-w-screen-xl mx-auto dark",
+          "min-h-screen font-sans text-base flex flex-col max-w-screen-xl mx-auto",
           authentic.variable,
           authenticCondensed.variable
         )}
       >
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

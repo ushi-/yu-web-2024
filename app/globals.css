@@ -21,11 +21,11 @@
   }
 
   .dark {
-    --background: 0 0% 6%;
-    --foreground: 0 0% 96%;
+    --background: 256 25% 10%;
+    --foreground: 60 25% 95%;
 
     --primary: 256 100% 70%;
-    --primary-foreground: 0 0% 9%;
+    --primary-foreground: 60 25% 95%;
 
     --muted: 0 0% 14.9%;
     --muted-foreground: 0 0% 63.9%;

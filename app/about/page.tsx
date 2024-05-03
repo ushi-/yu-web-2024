@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { getMDXComponent } from "next-contentlayer/hooks";
 
 import Header from "@/components/header";
-import { mdxComponents } from "@/components/mdxComponents";
+import { mdxComponents } from "@/components/mdx-components";
 
 import { allPages } from "contentlayer/generated";
 

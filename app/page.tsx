@@ -6,7 +6,7 @@ import { getMDXComponent } from "next-contentlayer/hooks";
 
 import Header from "@/components/header";
 import { Card } from "@/components/ui/card";
-import { mdxComponents } from "@/components/mdxComponents";
+import { mdxComponents } from "@/components/mdx-components";
 import Image from "next/image";
 
 export default function Home() {

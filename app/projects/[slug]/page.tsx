@@ -3,8 +3,8 @@ import { notFound } from "next/navigation";
 import { getMDXComponent } from "next-contentlayer/hooks";
 
 import Header from "@/components/header";
-import { mdxComponents } from "@/components/mdxComponents";
-import BilingualSection from "@/components/bilingualSection";
+import { mdxComponents } from "@/components/mdx-components";
+import BilingualSection from "@/components/bilingual-section";
 import { H1, H3 } from "@/components/ui/typography";
 
 export const generateStaticParams = async () =>

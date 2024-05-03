@@ -49,7 +49,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          "min-h-screen font-sans text-base flex flex-col max-w-screen-xl mx-auto",
+          "min-h-screen font-sans text-base flex flex-col max-w-screen-xl mx-auto dark",
           authentic.variable,
           authenticCondensed.variable
         )}

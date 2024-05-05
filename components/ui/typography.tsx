@@ -112,6 +112,26 @@ export const Blockquote = React.forwardRef<
 ));
 Blockquote.displayName = "Blockquote";
 
+export const Ulist = React.forwardRef<
+  HTMLUListElement,
+  React.ComponentProps<"ul">
+>(({ className, ...props }, ref) => (
+  <ul
+    className={cn("pl-[0.95em] indent-[-0.95em]", className)}
+    ref={ref}
+    {...props}
+  />
+));
+Ulist.displayName = "Ulist";
+
+export const ListItem = React.forwardRef<
+  HTMLLIElement,
+  React.ComponentProps<"li">
+>(({ className, ...props }, ref) => (
+  <li className={cn("before:content-['–_']", className)} ref={ref} {...props} />
+));
+ListItem.displayName = "ListItem";
+
 interface HeroProps extends React.ComponentProps<"span"> {
   language?: Language;
 }

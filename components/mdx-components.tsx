@@ -15,12 +15,6 @@ export const mdxComponents: MDXComponents = {
   a: ({ href, children }) => <Link href={href as string}>{children}</Link>,
   img: (props) => (
     // eslint-disable-next-line jsx-a11y/alt-text
-    <Image
-      sizes="100vw"
-      style={{ width: "100%", height: "auto" }}
-      width={1280}
-      height={1280}
-      {...(props as ImageProps)}
-    />
+    <Image sizes="100vw" fill objectFit="cover" {...(props as ImageProps)} />
   ),
 };

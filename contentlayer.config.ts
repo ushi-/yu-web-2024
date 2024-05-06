@@ -11,6 +11,7 @@ export const Project = defineDocumentType(() => ({
     date: { type: "date", required: true },
     taglineEn: { type: "string", required: true },
     taglineJa: { type: "string", required: true },
+    image: { type: "string", required: true },
   },
   computedFields: {
     url: {

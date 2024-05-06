@@ -12,11 +12,12 @@ import {
   CardSecondaryContent,
   CardFooter,
 } from "@/components/ui/card";
+import Image from "next/image";
 
 function ProjectCard(project: Project) {
   return (
-    <Card>
-      <CardContentContainer>
+    <Card className="flex-col-reverse gap-2.5">
+      <CardContentContainer className="justify-between">
         <CardPrimaryContentContainer>
           <CardPrimaryContent>
             <H2>{project.taglineEn}</H2>
@@ -29,7 +30,18 @@ function ProjectCard(project: Project) {
           <Link href={project.url}>{`${project.title}, ${project.year}`}</Link>
         </CardFooter>
       </CardContentContainer>
-      <CardSecondaryContent />
+      <CardSecondaryContent>
+        {project.image && (
+          <div className="w-full relative aspect-video">
+            <Image
+              className=" object-cover"
+              src={project.image}
+              alt={project.title}
+              fill
+            />
+          </div>
+        )}
+      </CardSecondaryContent>
     </Card>
   );
 }

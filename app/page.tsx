@@ -1,13 +1,11 @@
 "use client";
 
 import React from "react";
-import { allPages, Page } from "contentlayer/generated";
+import { allPages } from "contentlayer/generated";
 import { getMDXComponent } from "next-contentlayer/hooks";
 
 import Header from "@/components/header";
-import { Card } from "@/components/ui/card";
 import { mdxComponents } from "@/components/mdx-components";
-import Image from "next/image";
 
 export default function Home() {
   // const pages = allPages.sort((a, b) => a.order - b.order);

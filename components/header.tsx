@@ -26,13 +26,16 @@ const Header = ({ anchors }: HeaderProps) => {
           <CardContentContainer>
             <CardPrimaryContentContainer>
               <CardPrimaryContent>
-                <Link href="/">
+                <Link className="hover:text-primary/70 transition-all" href="/">
                   <H3 className="inline font-bold">yosukeushigo.me</H3>
                 </Link>
               </CardPrimaryContent>
               <CardPrimaryContent>
                 {anchors && anchors.length > 0 && (
-                  <Link href={anchors[0].href}>
+                  <Link
+                    className="hover:text-primary/70 transition-all"
+                    href={anchors[0].href}
+                  >
                     <H3 className="inline font-bold">{anchors[0].label}</H3>
                   </Link>
                 )}
@@ -41,7 +44,10 @@ const Header = ({ anchors }: HeaderProps) => {
           </CardContentContainer>
           <CardSecondaryContent>
             {anchors && anchors.length > 1 && (
-              <Link href={anchors[1].href}>
+              <Link
+                className="hover:text-primary/70 transition-all"
+                href={anchors[1].href}
+              >
                 <H3 className="inline font-bold">{anchors[1].label}</H3>
               </Link>
             )}

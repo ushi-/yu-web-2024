@@ -12,7 +12,7 @@ export const H1 = React.forwardRef<
       className={cn(
         "scroll-m-20 text-base md:text-lg lg:text-xl xl:text-2xl",
         lang === "jpn" &&
-          "text-base-ja md:text-lg-ja lg:text-xl-ja xl:text-2xl-ja font-ja  font-semibold",
+          "text-base-ja md:text-lg-ja lg:text-xl-ja xl:text-2xl-ja font-ja  font-medium",
         className
       )}
       ref={ref}
@@ -34,7 +34,7 @@ export const H2 = React.forwardRef<
       className={cn(
         "scroll-m-20 text-base md:text-lg lg:text-xl xl:text-xl",
         lang === "jpn" &&
-          "text-base-ja md:text-lg-ja lg:text-xl-ja xl:text-xl-ja font-ja  font-semibold",
+          "text-base-ja md:text-lg-ja lg:text-xl-ja xl:text-xl-ja font-ja  font-medium",
         className
       )}
       ref={ref}
@@ -67,7 +67,7 @@ export const H4 = React.forwardRef<
     <h4
       className={cn(
         "scroll-m-20 text-base font-bold",
-        lang === "jpn" && "text-base-ja font-ja font-bold",
+        lang === "jpn" && "text-base-ja font-ja font-medium",
         className
       )}
       ref={ref}
@@ -88,7 +88,7 @@ export const P = React.forwardRef<
     <p
       className={cn(
         "[&:not(:first-child)]:mt-5 text-base w-full",
-        lang === "jpn" && "text-base-ja font-ja  font-semibold",
+        lang === "jpn" && "text-base-ja font-ja  font-medium",
         className
       )}
       ref={ref}
@@ -147,7 +147,7 @@ export const Hero = React.forwardRef<HTMLSpanElement, HeroProps>(
       <span
         className={cn(
           "text-base",
-          lang === "jpn" && "text-base-ja font-ja  font-semibold",
+          lang === "jpn" && "text-base-ja font-ja  font-medium",
           className
         )}
         ref={ref}

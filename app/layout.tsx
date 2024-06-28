@@ -50,14 +50,14 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "min-h-screen font-sans text-base flex flex-col max-w-screen-xl mx-auto",
+          "min-h-screen font-sans text-base flex flex-col max-w-screen-xl mx-auto  pb-10 lg:pb-20",
           authentic.variable,
           authenticCondensed.variable
         )}
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >

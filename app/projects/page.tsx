@@ -3,7 +3,7 @@ import Link from "next/link";
 import { compareDesc } from "date-fns";
 import { allProjects, Project } from "contentlayer/generated";
 
-import { H2 } from "@/components/ui/typography";
+import { P } from "@/components/ui/typography";
 import Header from "@/components/header";
 import {
   Card,
@@ -14,17 +14,19 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 
+import { cn } from "@/lib/utils";
+
 function ProjectCard(project: Project) {
   return (
-    <Card className="flex-col-reverse gap-2.5 group">
-      <CardContentContainer className="justify-between">
+    <Card className="p-0 lg:p-0 flex-col-reverse lg:flex-col-reverse gap-2.5 lg:gap-2.5 group">
+      <CardContentContainer>
         <CardPrimaryContentContainer>
           <CardPrimaryContent>
             <Link
               href={project.url}
               className="group-hover:text-primary/70 transition-colors"
             >
-              <H2>{project.taglineEn}</H2>
+              <P>{project.taglineEn}</P>
             </Link>
           </CardPrimaryContent>
           <CardPrimaryContent>
@@ -32,7 +34,7 @@ function ProjectCard(project: Project) {
               href={project.url}
               className="group-hover:text-primary/70 transition-colors"
             >
-              <H2>{project.taglineJa}</H2>
+              <P>{project.taglineJa}</P>
             </Link>
           </CardPrimaryContent>
         </CardPrimaryContentContainer>
@@ -46,7 +48,14 @@ function ProjectCard(project: Project) {
       <CardSecondaryContent>
         <Link href={project.url}>
           {project.image && (
-            <div className="w-full relative aspect-video overflow-hidden">
+            <div
+              className={cn(
+                "w-full relative overflow-hidden",
+                ["aspect-square", "aspect-video"].at(
+                  Math.floor(Math.random() * 2)
+                )
+              )}
+            >
               <Image
                 className=" object-cover group-hover:scale-105 transition-transform"
                 src={project.image}
@@ -69,9 +78,13 @@ export default function Home() {
   return (
     <>
       <Header anchors={[{ label: "projects", href: "/projects" }]} />
-      {projects.map((project, idx) => (
-        <ProjectCard key={idx} {...project} />
-      ))}
+      <main>
+        <div className="px-2.5 lg:px-5 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-10 lg:gap-x-5">
+          {projects.map((project, idx) => (
+            <ProjectCard key={idx} {...project} />
+          ))}
+        </div>
+      </main>
     </>
   );
 }

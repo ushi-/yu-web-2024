@@ -21,7 +21,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main>
+      <main className="pt-5 lg:pt-10">
         {pages.map((page) => {
           const MDXContentEn = getMDXComponent(page.descriptionEn.code);
           const MDXContentJa = getMDXComponent(page.descriptionJa.code);

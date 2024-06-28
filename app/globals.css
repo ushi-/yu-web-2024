@@ -13,7 +13,7 @@
     --muted: 0 0% 96.1%;
     --muted-foreground: 0 0% 45.1%;
 
-    --border: 0 0% 89.8%;
+    --border: 256 50% 85%;
     --input: 0 0% 89.8%;
     --ring: 0 0% 3.9%;
 
@@ -30,7 +30,7 @@
     --muted: 0 0% 14.9%;
     --muted-foreground: 0 0% 63.9%;
 
-    --border: 0 0% 14.9%;
+    --border: 256 50% 35%;
     --input: 0 0% 14.9%;
     --ring: 0 0% 83.1%;
   }

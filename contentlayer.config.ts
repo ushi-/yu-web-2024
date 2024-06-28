@@ -29,12 +29,37 @@ export const Project = defineDocumentType(() => ({
   },
 }));
 
+export const Note = defineDocumentType(() => ({
+  name: "Note",
+  filePathPattern: `notes/*/*.mdx`,
+  contentType: "mdx",
+  fields: {
+    titleEn: { type: "string", required: true },
+    titleJa: { type: "string", required: true },
+    date: { type: "date", required: true },
+    image: { type: "string", required: false },
+  },
+  computedFields: {
+    url: {
+      type: "string",
+      resolve: (post) => `/notes/${slugify(post.titleEn, { lower: true })}`,
+    },
+    slug: {
+      type: "string",
+      resolve: (post) => slugify(post.titleEn, { lower: true }),
+    },
+  },
+}));
+
 export const Page = defineDocumentType(() => ({
   name: "Page",
-  filePathPattern: `**/index.mdx`,
+  filePathPattern: `*/index.mdx`,
   contentType: "mdx",
   fields: {
     title: { type: "string", required: true },
+    order: { type: "number", required: true },
+    descriptionEn: { type: "mdx", required: true },
+    descriptionJa: { type: "mdx", required: true },
   },
   computedFields: {
     url: {
@@ -50,5 +75,5 @@ export const Page = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: "content",
-  documentTypes: [Project, Page],
+  documentTypes: [Project, Page, Note],
 });

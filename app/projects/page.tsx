@@ -18,35 +18,29 @@ import { cn } from "@/lib/utils";
 
 function ProjectCard(project: Project) {
   return (
-    <Card className="p-0 lg:p-0 flex-col-reverse lg:flex-col-reverse gap-2.5 lg:gap-2.5 group">
-      <CardContentContainer>
-        <CardPrimaryContentContainer>
-          <CardPrimaryContent>
-            <Link
-              href={project.url}
-              className="group-hover:text-primary/70 transition-colors"
-            >
-              <P>{project.taglineEn}</P>
-            </Link>
-          </CardPrimaryContent>
-          <CardPrimaryContent>
-            <Link
-              href={project.url}
-              className="group-hover:text-primary/70 transition-colors"
-            >
-              <P>{project.taglineJa}</P>
-            </Link>
-          </CardPrimaryContent>
-        </CardPrimaryContentContainer>
-        <CardFooter>
-          <Link
-            className="group-hover:text-primary/70 transition-colors"
-            href={project.url}
-          >{`${project.title}, ${project.year}`}</Link>
-        </CardFooter>
-      </CardContentContainer>
-      <CardSecondaryContent>
-        <Link href={project.url}>
+    <Link href={project.url} className="group">
+      <Card className="p-0 lg:p-0 flex-col-reverse lg:flex-col-reverse gap-2.5 lg:gap-2.5">
+        <CardContentContainer>
+          <CardPrimaryContentContainer>
+            <CardPrimaryContent>
+              <Link
+                href={project.url}
+                className="group-hover:text-primary/70 transition-colors"
+              >
+                <P>{project.taglineEn}</P>
+              </Link>
+            </CardPrimaryContent>
+            <CardPrimaryContent>
+              <P className="group-hover:text-primary/70 transition-colors">
+                {project.taglineJa}
+              </P>
+            </CardPrimaryContent>
+          </CardPrimaryContentContainer>
+          <CardFooter className="group-hover:text-primary/70 transition-colors">
+            {`${project.title}, ${project.year}`}
+          </CardFooter>
+        </CardContentContainer>
+        <CardSecondaryContent>
           {project.image && (
             <div
               className={cn(
@@ -57,16 +51,16 @@ function ProjectCard(project: Project) {
               )}
             >
               <Image
-                className=" object-cover group-hover:scale-105 transition-transform"
+                className=" object-cover group-hover:opacity-80 transition-opacity"
                 src={project.image}
                 alt={project.title}
                 fill
               />
             </div>
           )}
-        </Link>
-      </CardSecondaryContent>
-    </Card>
+        </CardSecondaryContent>
+      </Card>
+    </Link>
   );
 }
 
@@ -79,7 +73,7 @@ export default function Home() {
     <>
       <Header anchors={[{ label: "projects", href: "/projects" }]} />
       <main>
-        <div className="px-2.5 lg:px-5 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-10 lg:gap-x-5">
+        <div className="px-2.5 lg:px-5 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 items-start gap-10 lg:gap-x-5">
           {projects.map((project, idx) => (
             <ProjectCard key={idx} {...project} />
           ))}

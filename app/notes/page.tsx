@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { compareDesc } from "date-fns";
-import { allNotes, note } from "contentlayer/generated";
+import { allNotes, Note } from "contentlayer/generated";
 
-import { H2 } from "@/components/ui/typography";
+import { P } from "@/components/ui/typography";
 import Header from "@/components/header";
 import {
   Card,
@@ -13,53 +13,47 @@ import {
   CardSecondaryContent,
   CardFooter,
 } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 
-// function ProjectCard(project: Project) {
-//   return (
-//     <Card className="flex-col-reverse gap-2.5 group">
-//       <CardContentContainer className="justify-between">
-//         <CardPrimaryContentContainer>
-//           <CardPrimaryContent>
-//             <Link
-//               href={project.url}
-//               className="group-hover:text-primary/70 transition-colors"
-//             >
-//               <H2>{project.taglineEn}</H2>
-//             </Link>
-//           </CardPrimaryContent>
-//           <CardPrimaryContent>
-//             <Link
-//               href={project.url}
-//               className="group-hover:text-primary/70 transition-colors"
-//             >
-//               <H2>{project.taglineJa}</H2>
-//             </Link>
-//           </CardPrimaryContent>
-//         </CardPrimaryContentContainer>
-//         <CardFooter>
-//           <Link
-//             className="group-hover:text-primary/70 transition-colors"
-//             href={project.url}
-//           >{`${project.title}, ${project.year}`}</Link>
-//         </CardFooter>
-//       </CardContentContainer>
-//       <CardSecondaryContent>
-//         <Link href={project.url}>
-//           {project.image && (
-//             <div className="w-full relative aspect-video overflow-hidden">
-//               <Image
-//                 className=" object-cover group-hover:scale-105 transition-transform"
-//                 src={project.image}
-//                 alt={project.title}
-//                 fill
-//               />
-//             </div>
-//           )}
-//         </Link>
-//       </CardSecondaryContent>
-//     </Card>
-//   );
-// }
+function NoteCard(note: Note) {
+  return (
+    <Link href={note.url} className="group">
+      <Card>
+        <CardContentContainer>
+          <CardPrimaryContentContainer>
+            <CardPrimaryContent>
+              <P className="group-hover:text-primary/70 transition-colors">
+                {note.titleEn}
+              </P>
+            </CardPrimaryContent>
+            <CardPrimaryContent>
+              <P className="group-hover:text-primary/70 transition-colors">
+                {note.titleJa}
+              </P>
+            </CardPrimaryContent>
+          </CardPrimaryContentContainer>
+          <CardFooter className="group-hover:text-primary/70 transition-colors">
+            {note.formattedDate}
+          </CardFooter>
+        </CardContentContainer>
+        <CardSecondaryContent>
+          {note.image && (
+            <div
+              className={cn("w-full relative overflow-hidden aspect-square")}
+            >
+              <Image
+                className=" object-cover group-hover:opacity-80 transition-opacity"
+                src={note.image}
+                alt={note.titleEn}
+                fill
+              />
+            </div>
+          )}
+        </CardSecondaryContent>
+      </Card>
+    </Link>
+  );
+}
 
 export default function Home() {
   const notes = allNotes.sort((a, b) =>
@@ -67,13 +61,11 @@ export default function Home() {
   );
 
   return (
-    <>
+    <main>
       <Header anchors={[{ label: "notes", href: "/notes" }]} />
-      <ul>
-        {notes.map((note, idx) => (
-          <li key={idx}>{note.titleEn}</li>
-        ))}
-      </ul>
-    </>
+      {notes.map((note, idx) => (
+        <NoteCard key={idx} {...note} />
+      ))}
+    </main>
   );
 }

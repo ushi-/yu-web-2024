@@ -48,6 +48,10 @@ export const Note = defineDocumentType(() => ({
       type: "string",
       resolve: (post) => slugify(post.titleEn, { lower: true }),
     },
+    formattedDate: {
+      type: "string",
+      resolve: (post) => format(new Date(post.date), "yyyy-MM-dd"),
+    },
   },
 }));
 

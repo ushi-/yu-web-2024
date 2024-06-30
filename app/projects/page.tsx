@@ -23,12 +23,9 @@ function ProjectCard(project: Project) {
         <CardContentContainer>
           <CardPrimaryContentContainer>
             <CardPrimaryContent>
-              <Link
-                href={project.url}
-                className="group-hover:text-primary/70 transition-colors"
-              >
-                <P>{project.taglineEn}</P>
-              </Link>
+              <P className="group-hover:text-primary/70 transition-colors">
+                {project.taglineEn}
+              </P>
             </CardPrimaryContent>
             <CardPrimaryContent>
               <P className="group-hover:text-primary/70 transition-colors">

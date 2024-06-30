@@ -44,8 +44,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
       <BilingualSection>
         <H1>{post.taglineEn}</H1>
         <H1>{post.taglineJa}</H1>
-        <div>
+        <div className="flex flex-col">
           <H3>{`${post.title}, ${post.year}`}</H3>
+          {post.meta && post.meta.map((meta) => <H3 key={meta}>{meta}</H3>)}
         </div>
       </BilingualSection>
       <MDXContent components={mdxComponents} />

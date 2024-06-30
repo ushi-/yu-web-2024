@@ -30,7 +30,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   return (
     <>
-      <Header anchors={[{ label: "projects", href: "/projects" }]} />
+      <Header anchors={[{ label: "notes", href: "/notes" }]} />
       {post.image && (
         <Card className="p-0 lg:py-0">
           <div className="w-full aspect-video relative">
@@ -46,8 +46,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
       <BilingualSection>
         <H1>{post.titleEn}</H1>
         <H1>{post.titleJa}</H1>
-        <div>
+        <div className="flex flex-col">
           <H3>{post.formattedDate}</H3>
+          {post.meta && post.meta.map((meta) => <H3 key={meta}>{meta}</H3>)}
         </div>
       </BilingualSection>
       <MDXContent components={mdxComponents} />

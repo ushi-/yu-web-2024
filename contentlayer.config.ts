@@ -12,6 +12,7 @@ export const Project = defineDocumentType(() => ({
     taglineEn: { type: "string", required: true },
     taglineJa: { type: "string", required: true },
     image: { type: "string", required: true },
+    meta: { type: "list", of: { type: "string" }, required: false },
   },
   computedFields: {
     url: {
@@ -38,6 +39,7 @@ export const Note = defineDocumentType(() => ({
     titleJa: { type: "string", required: true },
     date: { type: "date", required: true },
     image: { type: "string", required: false },
+    meta: { type: "list", of: { type: "string" }, required: false },
   },
   computedFields: {
     url: {

@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { getMDXComponent } from "next-contentlayer/hooks";
 
+import { Card } from "@/components/ui/card";
 import Header from "@/components/header";
 import { mdxComponents } from "@/components/mdx-components";
 
@@ -21,10 +22,11 @@ export default async function Page() {
   const MDXContent = getMDXComponent(post.body.code);
 
   return (
-    <>
+    <main>
       <Header anchors={[{ label: "about", href: "/about" }]} />
-      {/* Some code ... */}
-      <MDXContent components={mdxComponents} />
-    </>
+      <div className="p-2.5 lg:p-5">
+        <MDXContent components={mdxComponents} />
+      </div>
+    </main>
   );
 }

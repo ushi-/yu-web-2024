@@ -29,7 +29,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
   const MDXContent = getMDXComponent(post.body.code);
 
   return (
-    <>
+    <main>
       <Header anchors={[{ label: "projects", href: "/projects" }]} />
       <Card className="p-0 lg:py-0">
         <div className="w-full aspect-video relative">
@@ -41,7 +41,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
           />
         </div>
       </Card>
-      <BilingualSection>
+      <BilingualSection padded>
         <H1>{post.taglineEn}</H1>
         <H1>{post.taglineJa}</H1>
         <div className="flex flex-col">
@@ -49,7 +49,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
           {post.meta && post.meta.map((meta) => <H3 key={meta}>{meta}</H3>)}
         </div>
       </BilingualSection>
-      <MDXContent components={mdxComponents} />
-    </>
+      <div className="p-2.5 lg:p-5">
+        <MDXContent components={mdxComponents} />
+      </div>
+    </main>
   );
 }

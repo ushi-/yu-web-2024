@@ -8,7 +8,11 @@ export const mdxComponents: MDXComponents = {
   h1: ({ children }) => <H1>{children}</H1>,
   h2: ({ children }) => <H2>{children}</H2>,
   h3: ({ children }) => <H3>{children}</H3>,
-  h4: ({ children }) => <H4>{children}</H4>,
+  h4: ({ children }) => (
+    <H4 className="mt-5 lg:mt-10 first:mt-0 first:lg:mt-0 mb-2.5 lg:mb-5">
+      {children}
+    </H4>
+  ),
   p: ({ children }) => <P>{children}</P>,
   ul: ({ children }) => <Ulist>{children}</Ulist>,
   li: ({ children }) => <ListItem>{children}</ListItem>,

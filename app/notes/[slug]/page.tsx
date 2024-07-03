@@ -43,7 +43,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
           </div>
         </Card>
       )}
-      <BilingualSection padded>
+      <BilingualSection padded className="gap-2.5">
         <H1>{post.titleEn}</H1>
         <H1>{post.titleJa}</H1>
         <div className="flex flex-col">

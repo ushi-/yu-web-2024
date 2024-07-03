@@ -10,9 +10,9 @@ export const H1 = React.forwardRef<
   return (
     <h1
       className={cn(
-        "scroll-m-20 text-base md:text-lg lg:text-xl xl:text-2xl",
+        "scroll-m-20 text-base md:text-lg lg:text-xl xl:text-2xl font-bold md:font-normal",
         lang === "jpn" &&
-          "text-base-ja md:text-lg-ja lg:text-xl-ja xl:text-2xl-ja font-ja  font-medium",
+          "text-base-ja md:text-lg-ja lg:text-xl-ja xl:text-2xl-ja font-ja font-bold md:font-medium",
         className
       )}
       ref={ref}
@@ -34,7 +34,7 @@ export const H2 = React.forwardRef<
       className={cn(
         "scroll-m-20 text-base md:text-lg lg:text-xl xl:text-xl",
         lang === "jpn" &&
-          "text-base-ja md:text-lg-ja lg:text-xl-ja xl:text-xl-ja font-ja  font-medium",
+          "text-base-ja md:text-lg-ja lg:text-xl-ja xl:text-xl-ja font-ja font-medium",
         className
       )}
       ref={ref}

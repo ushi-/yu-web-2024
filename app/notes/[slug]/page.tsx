@@ -47,8 +47,13 @@ export default async function Page({ params }: { params: { slug: string } }) {
         <H1>{post.titleEn}</H1>
         <H1>{post.titleJa}</H1>
         <div className="flex flex-col">
-          <H3>{post.formattedDate}</H3>
-          {post.meta && post.meta.map((meta) => <H3 key={meta}>{meta}</H3>)}
+          <H3 className="text-muted-foreground">{post.formattedDate}</H3>
+          {post.meta &&
+            post.meta.map((meta) => (
+              <H3 key={meta} className="text-muted-foreground">
+                {meta}
+              </H3>
+            ))}
         </div>
       </BilingualSection>
       <div className="p-2.5 lg:p-5">

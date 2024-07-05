@@ -44,6 +44,15 @@ export const metadata: Metadata = {
   description:
     "I'm Yosuke Ushigome (yōs-ké • he/him), a London-based designer / technologist.",
   keywords: ["Design", "Technology", "Futures"],
+  metadataBase: new URL("https://yu-web-2024.vercel.app"),
+  openGraph: {
+    title: "Yosuke Ushigome",
+    description:
+      "I'm Yosuke Ushigome (yōs-ké • he/him), a London-based designer / technologist.",
+    url: "https://www.yosukeushigo.me",
+    locale: "en_GP",
+    type: "website",
+  },
 };
 
 export default function RootLayout({

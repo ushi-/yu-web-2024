@@ -20,7 +20,36 @@ export const generateMetadata = ({
 }): Metadata => {
   const post = allNotes.find((post) => post.slug === params.slug);
   if (!post) throw new Error(`Post not found for slug: ${params.slug}`);
-  return { title: post.titleEn, description: post.formattedDate };
+  return {
+    title: post.titleEn,
+    description: post.formattedDate,
+    openGraph: {
+      title: `${post.titleEn} | Yosuke Ushigome`,
+      description: post.formattedDate,
+      url: post.url,
+      images: post.image
+        ? [
+            {
+              url: post.image,
+              alt: post.imageAlt ? post.imageAlt : post.titleEn,
+            },
+          ]
+        : [],
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      creator: "@ushi_",
+      images: post.image
+        ? [
+            {
+              url: post.image,
+              alt: post.imageAlt ? post.imageAlt : post.titleEn,
+            },
+          ]
+        : [],
+    },
+  };
 };
 
 export default async function Page({ params }: { params: { slug: string } }) {

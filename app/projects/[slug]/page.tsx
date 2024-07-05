@@ -23,7 +23,24 @@ export const generateMetadata = ({
 }): Metadata => {
   const post = allProjects.find((post) => post.slug === params.slug);
   if (!post) throw new Error(`Post not found for slug: ${params.slug}`);
-  return { title: post.title, description: post.taglineEn };
+  return {
+    title: post.title,
+    description: post.taglineEn,
+    openGraph: {
+      title: `${post.title} | Yosuke Ushigome`,
+      description: post.taglineEn,
+      url: post.url,
+      images: [
+        { url: post.image, alt: post.imageAlt ? post.imageAlt : post.title },
+      ],
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      creator: "@ushi_",
+      images: [post.image],
+    },
+  };
 };
 
 export default async function Page({ params }: { params: { slug: string } }) {
@@ -46,7 +63,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
           ) : (
             <Image
               src={post.image}
-              alt={post.title}
+              alt={post.imageAlt ? post.imageAlt : post.title}
               fill
               className="object-cover"
             />

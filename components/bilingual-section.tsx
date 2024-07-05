@@ -12,14 +12,16 @@ type BilingualSectionProps = {
   children: React.ReactNode;
   padded?: boolean;
   className?: string;
+  mono?: boolean;
 };
 
 const BilingualSection = ({
   children,
   padded = false,
   className = "",
+  mono = false,
 }: BilingualSectionProps) => {
-  const [englishContent, japaneseContent, secondaryContent] =
+  const [firstContent, secondContent, thirdContent] =
     React.Children.toArray(children);
   return (
     <Card
@@ -31,12 +33,12 @@ const BilingualSection = ({
     >
       <CardContentContainer>
         <CardPrimaryContentContainer>
-          <CardPrimaryContent>{englishContent}</CardPrimaryContent>
-          <CardPrimaryContent>{japaneseContent}</CardPrimaryContent>
+          <CardPrimaryContent>{firstContent}</CardPrimaryContent>
+          {!mono && <CardPrimaryContent>{secondContent}</CardPrimaryContent>}
         </CardPrimaryContentContainer>
       </CardContentContainer>
       <CardSecondaryContent className="font-condensed">
-        {secondaryContent}
+        {!mono ? thirdContent : secondContent}
       </CardSecondaryContent>
     </Card>
   );

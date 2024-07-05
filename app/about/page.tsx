@@ -1,14 +1,14 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getMDXComponent } from "next-contentlayer/hooks";
 
-import { Card } from "@/components/ui/card";
 import Header from "@/components/header";
 import { mdxComponents } from "@/components/mdx-components";
 
 import { allPages } from "contentlayer/generated";
 
-export const generateMetadata = () => {
-  return { title: "About" };
+export const metadata: Metadata = {
+  title: "About",
 };
 
 export default async function Page() {

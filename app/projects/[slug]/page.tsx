@@ -4,7 +4,7 @@ import { allProjects } from "contentlayer/generated";
 import { notFound } from "next/navigation";
 import { getMDXComponent } from "next-contentlayer/hooks";
 import Image from "next/image";
-// import ReactPlayer from "react-player";
+import type { Metadata } from "next";
 
 import Header from "@/components/header";
 import { Card } from "@/components/ui/card";
@@ -16,10 +16,14 @@ import VideoPlayer from "@/components/video-player";
 export const generateStaticParams = async () =>
   allProjects.map((post) => ({ slug: post.slug }));
 
-export const generateMetadata = ({ params }: { params: { slug: string } }) => {
+export const generateMetadata = ({
+  params,
+}: {
+  params: { slug: string };
+}): Metadata => {
   const post = allProjects.find((post) => post.slug === params.slug);
   if (!post) throw new Error(`Post not found for slug: ${params.slug}`);
-  return { title: post.title };
+  return { title: post.title, description: post.taglineEn };
 };
 
 export default async function Page({ params }: { params: { slug: string } }) {

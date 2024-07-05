@@ -2,6 +2,7 @@ import { allNotes } from "contentlayer/generated";
 import { notFound } from "next/navigation";
 import { getMDXComponent } from "next-contentlayer/hooks";
 import Image from "next/image";
+import type { Metadata } from "next";
 
 import Header from "@/components/header";
 import { Card } from "@/components/ui/card";
@@ -12,10 +13,14 @@ import { H1, H3 } from "@/components/ui/typography";
 export const generateStaticParams = async () =>
   allNotes.map((post) => ({ slug: post.slug }));
 
-export const generateMetadata = ({ params }: { params: { slug: string } }) => {
+export const generateMetadata = ({
+  params,
+}: {
+  params: { slug: string };
+}): Metadata => {
   const post = allNotes.find((post) => post.slug === params.slug);
   if (!post) throw new Error(`Post not found for slug: ${params.slug}`);
-  return { title: post.titleEn };
+  return { title: post.titleEn, description: post.formattedDate };
 };
 
 export default async function Page({ params }: { params: { slug: string } }) {

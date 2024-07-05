@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { compareDesc } from "date-fns";
 import { allProjects, Project } from "contentlayer/generated";
 
@@ -15,6 +16,10 @@ import {
 } from "@/components/ui/card";
 
 import { cn } from "@/lib/utils";
+
+export const metadata: Metadata = {
+  title: "Projects",
+};
 
 function ProjectCard(project: Project) {
   return (

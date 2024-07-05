@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { compareDesc } from "date-fns";
 import { allNotes, Note } from "contentlayer/generated";
@@ -14,6 +15,10 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+
+export const metadata: Metadata = {
+  title: "Notes",
+};
 
 function NoteCard(note: Note) {
   return (

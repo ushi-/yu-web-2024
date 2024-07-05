@@ -13,6 +13,7 @@ export const Project = defineDocumentType(() => ({
     taglineJa: { type: "string", required: true },
     image: { type: "string", required: true },
     meta: { type: "list", of: { type: "string" }, required: false },
+    video: { type: "string", required: false },
   },
   computedFields: {
     url: {

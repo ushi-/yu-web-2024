@@ -1,13 +1,17 @@
+// "use client";
+
 import { allProjects } from "contentlayer/generated";
 import { notFound } from "next/navigation";
 import { getMDXComponent } from "next-contentlayer/hooks";
 import Image from "next/image";
+// import ReactPlayer from "react-player";
 
 import Header from "@/components/header";
 import { Card } from "@/components/ui/card";
 import { mdxComponents } from "@/components/mdx-components";
 import BilingualSection from "@/components/bilingual-section";
 import { H1, H3 } from "@/components/ui/typography";
+import VideoPlayer from "@/components/video-player";
 
 export const generateStaticParams = async () =>
   allProjects.map((post) => ({ slug: post.slug }));
@@ -32,13 +36,17 @@ export default async function Page({ params }: { params: { slug: string } }) {
     <main>
       <Header anchors={[{ label: "projects", href: "/projects" }]} />
       <Card className="p-0 lg:py-0">
-        <div className="w-full aspect-video relative">
-          <Image
-            src={post.image}
-            alt={post.title}
-            fill
-            className="object-cover"
-          />
+        <div className="w-full aspect-video relative bg-foreground">
+          {post.video ? (
+            <VideoPlayer url={post.video} />
+          ) : (
+            <Image
+              src={post.image}
+              alt={post.title}
+              fill
+              className="object-cover"
+            />
+          )}
         </div>
       </Card>
       <BilingualSection padded className="gap-2.5">

@@ -5,10 +5,17 @@ import Image from "next/image";
 import type { Metadata } from "next";
 
 import Header from "@/components/header";
-import { Card } from "@/components/ui/card";
+import {
+  Card,
+  CardContentContainer,
+  CardPrimaryContent,
+  CardPrimaryContentContainer,
+  CardSecondaryContent,
+} from "@/components/ui/card";
 import { mdxComponents } from "@/components/mdx-components";
 import BilingualSection from "@/components/bilingual-section";
 import { H1, H3 } from "@/components/ui/typography";
+import { Link } from "@/components/ui/link";
 
 export const generateStaticParams = async () =>
   allNotes.map((post) => ({ slug: post.slug }));
@@ -59,6 +66,12 @@ export default async function Page({ params }: { params: { slug: string } }) {
   // 404 if the post does not exist.
   if (!post) notFound();
 
+  const prevPostIndex = allNotes.indexOf(post) - 1;
+  const prevPost = prevPostIndex >= 0 ? allNotes.at(prevPostIndex) : null;
+  const nextPostIndex = allNotes.indexOf(post) + 1;
+  const nextPost =
+    nextPostIndex < allNotes.length ? allNotes.at(nextPostIndex) : null;
+
   // Parse the MDX file via the useMDXComponent hook.
   const MDXContent = getMDXComponent(post.body.code);
 
@@ -93,6 +106,19 @@ export default async function Page({ params }: { params: { slug: string } }) {
       <div className="p-2.5 lg:p-5">
         <MDXContent components={mdxComponents} />
       </div>
+      <Card>
+        <CardContentContainer>
+          <CardPrimaryContentContainer>
+            <CardPrimaryContent>
+              {prevPost && <Link href={prevPost.url}>Previous note</Link>}
+            </CardPrimaryContent>
+            <CardPrimaryContent className="text-end">
+              {nextPost && <Link href={nextPost.url}>Next note</Link>}
+            </CardPrimaryContent>
+          </CardPrimaryContentContainer>
+        </CardContentContainer>
+        <CardSecondaryContent />
+      </Card>
     </main>
   );
 }

@@ -44,7 +44,8 @@ export const metadata: Metadata = {
   description:
     "I'm Yosuke Ushigome (yōs-ké • he/him), a London-based designer / technologist.",
   keywords: ["Design", "Technology", "Futures"],
-  metadataBase: new URL("https://yu-web-2024.vercel.app"),
+  metadataBase: new URL("https://yu-web-2024.vercel.app"), // for development
+  // metadataBase: new URL("https://yosukeushigo.me"),  // TODO: for production
   openGraph: {
     title: "Yosuke Ushigome",
     description:

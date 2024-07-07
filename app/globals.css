@@ -11,7 +11,7 @@
     --primary-foreground: 0 0% 98%;
 
     --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 40%;
+    --muted-foreground: 0 0% 60%;
 
     --border: 256 50% 85%;
     --input: 0 0% 89.8%;
@@ -28,7 +28,7 @@
     --primary-foreground: 60 25% 95%;
 
     --muted: 0 0% 14.9%;
-    --muted-foreground: 60 25% 60%;
+    --muted-foreground: 60 25% 40%;
 
     --border: 256 50% 35%;
     --input: 0 0% 14.9%;

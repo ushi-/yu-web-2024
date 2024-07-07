@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import { cn } from "@/lib/utils";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import Footer from "@/components/footer";
 
 const authentic = localFont({
   src: [
@@ -65,7 +66,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "min-h-screen font-sans text-base flex flex-col max-w-screen-xl mx-auto  pb-10 lg:pb-20",
+          "min-h-screen font-sans text-base flex flex-col max-w-screen-xl mx-auto",
           authentic.variable,
           authenticCondensed.variable
         )}
@@ -76,7 +77,8 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <div className="flex-1 flex flex-col mb-10 lg:mb-20">{children}</div>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

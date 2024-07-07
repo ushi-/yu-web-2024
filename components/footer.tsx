@@ -11,7 +11,7 @@ const Footer = () => (
     <Card>
       <CardContentContainer>
         <CardPrimaryContentContainer>
-          <CardPrimaryContent className="text-muted-foreground">
+          <CardPrimaryContent className="text-muted-foreground text-sm">
             © Yosuke Ushigome
           </CardPrimaryContent>
           <CardPrimaryContent />

@@ -15,6 +15,7 @@ const config: Config = {
       xl: "1280px",
     },
     fontSize: {
+      sm: ["14px", { lineHeight: "21px" }],
       base: ["16px", { lineHeight: "24px" }],
       lg: ["20px", { lineHeight: "30px" }],
       xl: ["24px", { lineHeight: "36px" }],

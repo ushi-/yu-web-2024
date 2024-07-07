@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getMDXComponent } from "next-contentlayer/hooks";
 import Image from "next/image";
 import type { Metadata } from "next";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 import Header from "@/components/header";
 import {
@@ -110,10 +111,24 @@ export default async function Page({ params }: { params: { slug: string } }) {
         <CardContentContainer>
           <CardPrimaryContentContainer>
             <CardPrimaryContent>
-              {prevPost && <Link href={prevPost.url}>Previous note</Link>}
+              {prevPost && (
+                <Link href={prevPost.url}>
+                  <div className="flex gap-1 items-middle">
+                    <ArrowLeft size={20} strokeWidth={1.5} />
+                    Previous note
+                  </div>
+                </Link>
+              )}
             </CardPrimaryContent>
-            <CardPrimaryContent className="text-end">
-              {nextPost && <Link href={nextPost.url}>Next note</Link>}
+            <CardPrimaryContent>
+              {nextPost && (
+                <Link href={nextPost.url} className="flex justify-end">
+                  <div className="flex gap-1 items-middle">
+                    Next note
+                    <ArrowRight size={20} strokeWidth={1.5} />
+                  </div>
+                </Link>
+              )}
             </CardPrimaryContent>
           </CardPrimaryContentContainer>
         </CardContentContainer>

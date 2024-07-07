@@ -1,13 +1,10 @@
-import Link from "next/link";
-
-import { H3 } from "@/components/ui/typography";
 import {
   Card,
   CardContentContainer,
   CardPrimaryContent,
   CardPrimaryContentContainer,
   CardSecondaryContent,
-} from "./ui/card";
+} from "@/components/ui/card";
 
 const Footer = () => (
   <footer>

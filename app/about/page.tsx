@@ -4,6 +4,7 @@ import { getMDXComponent } from "next-contentlayer/hooks";
 
 import Header from "@/components/header";
 import { mdxComponents } from "@/components/mdx-components";
+import PageNavigation from "@/components/page-navigation";
 
 import { allPages } from "contentlayer/generated";
 
@@ -12,8 +13,10 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  // Find the post for the current page.
-  const post = allPages.find((post) => post.slug === "about");
+  const pages = allPages
+    .sort((a, b) => a.order - b.order)
+    .filter((page) => page.slug !== "contact");
+  const post = pages.find((post) => post.slug === "about");
 
   // 404 if the post does not exist.
   if (!post) notFound();
@@ -22,11 +25,16 @@ export default async function Page() {
   const MDXContent = getMDXComponent(post.body.code);
 
   return (
-    <main>
+    <>
       <Header anchors={[{ label: "about", href: "/about" }]} />
-      <div className="p-2.5 lg:p-5">
-        <MDXContent components={mdxComponents} />
-      </div>
-    </main>
+      <main className="pt-5 lg:pt-10">
+        {pages.map((page) => (
+          <PageNavigation key={page.slug} page={page} showAboutLink={false} />
+        ))}
+        <div className="p-2.5 lg:p-5 mt-2.5 lg:mt-5">
+          <MDXContent components={mdxComponents} />
+        </div>
+      </main>
+    </>
   );
 }

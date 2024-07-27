@@ -31,7 +31,7 @@ export default async function Page() {
         {pages.map((page) => (
           <PageNavigation key={page.slug} page={page} showAboutLink={false} />
         ))}
-        <div className="p-2.5 lg:p-5 mt-2.5 lg:mt-5">
+        <div className="p-2.5 lg:p-5 mt-5 lg:mt-10">
           <MDXContent components={mdxComponents} />
         </div>
       </main>

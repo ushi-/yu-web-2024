@@ -21,8 +21,8 @@ export const mdxComponents: MDXComponents = {
     /* eslint-disable-next-line jsx-a11y/alt-text*/
     <Image
       className="object-cover"
-      width={820}
-      height={820}
+      width={1280}
+      height={1280}
       {...(props as ImageProps)}
     />
   ),

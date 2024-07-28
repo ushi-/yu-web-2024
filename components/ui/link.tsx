@@ -8,6 +8,7 @@ export interface myLinkProps
 
 const MyLink = React.forwardRef<HTMLAnchorElement, myLinkProps>(
   ({ href, className, ...props }, ref) => {
+    const isExternal = (href as string).startsWith("http");
     return (
       <Link
         href={href}
@@ -15,6 +16,7 @@ const MyLink = React.forwardRef<HTMLAnchorElement, myLinkProps>(
           "text-primary hover:text-primary/70 transition-colors",
           className
         )}
+        target={isExternal ? "_blank" : undefined}
         {...props}
         ref={ref}
       />

@@ -47,15 +47,15 @@ function ProjectCard(project: Project) {
             <div
               className={cn(
                 "w-full relative overflow-hidden",
-                ["aspect-square", "aspect-video"].at(
-                  Math.floor(Math.random() * 2)
-                )
+                project.imageOrientation === "landscape" && "aspect-[16/10]",
+                project.imageOrientation === "portrait" && "aspect-[2/3]",
+                project.imageOrientation === "square" && "aspect-square"
               )}
             >
               <Image
                 className=" object-cover group-hover:opacity-80 transition-opacity"
                 src={project.image}
-                alt={project.title}
+                alt={project.imageAlt ? project.imageAlt : project.title}
                 fill
               />
             </div>

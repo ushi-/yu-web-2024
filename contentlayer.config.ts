@@ -13,6 +13,12 @@ export const Project = defineDocumentType(() => ({
     taglineJa: { type: "string", required: true },
     image: { type: "string", required: true },
     imageAlt: { type: "string", required: false },
+    imageOrientation: {
+      type: "enum",
+      options: ["landscape", "portrait", "square"],
+      default: "landscape",
+      required: false,
+    },
     meta: { type: "list", of: { type: "string" }, required: false },
     video: { type: "string", required: false },
   },

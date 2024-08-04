@@ -8,16 +8,16 @@ export interface myLinkProps
 
 const MyLink = React.forwardRef<HTMLAnchorElement, myLinkProps>(
   ({ href, className, children, ...props }, ref) => {
-    const isExternal =
-      (href as string).startsWith("http") && typeof children === "string";
+    const isExternal = (href as string).startsWith("http");
+    const isTextLink = typeof children === "string";
     return (
       <Link
         href={href}
         className={cn(
           "text-primary hover:text-primary/70 transition-colors",
           isExternal &&
-            "after:ml-0.5 after:w-4 after:h-4 after:bg-center after:bg-contain after:translate-y-0.5 after:inline-block after:bg- after:text-center after:bg-no-repeat after:hover:opacity-70",
-          isExternal && `after:bg-[url('/move-up-right.svg')]`,
+            isTextLink &&
+            "after:ml-0.5 after:w-4 after:h-4 after:bg-center after:bg-contain after:translate-y-0.5 after:inline-block after:bg- after:text-center after:bg-no-repeat after:hover:opacity-70 after:bg-[url('/move-up-right.svg')]",
 
           className
         )}

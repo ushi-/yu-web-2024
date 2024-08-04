@@ -1,5 +1,5 @@
 import { allNotes } from "contentlayer/generated";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { getMDXComponent } from "next-contentlayer/hooks";
 import Image from "next/image";
 import type { Metadata } from "next";
@@ -66,6 +66,10 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   // 404 if the post does not exist.
   if (!post) notFound();
+
+  if (post.link) {
+    redirect(post.link);
+  }
 
   const prevPostIndex = allNotes.indexOf(post) - 1;
   const prevPost = prevPostIndex >= 0 ? allNotes.at(prevPostIndex) : null;

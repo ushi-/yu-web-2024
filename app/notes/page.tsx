@@ -1,9 +1,9 @@
 import Image from "next/image";
 import type { Metadata } from "next";
-import Link from "next/link";
 import { compareDesc } from "date-fns";
 import { allNotes, Note } from "contentlayer/generated";
 
+import { Link } from "@/components/ui/link";
 import { P } from "@/components/ui/typography";
 import Header from "@/components/header";
 import {
@@ -22,24 +22,18 @@ export const metadata: Metadata = {
 
 function NoteCard(note: Note) {
   return (
-    <Link href={note.url} className="group">
+    <Link href={note.url} className="text-foreground group">
       <Card>
         <CardContentContainer>
           <CardPrimaryContentContainer>
             <CardPrimaryContent>
-              <P className="group-hover:text-primary/70 transition-colors">
-                {note.titleEn}
-              </P>
+              <P>{note.titleEn}</P>
             </CardPrimaryContent>
             <CardPrimaryContent>
-              <P className="group-hover:text-primary/70 transition-colors">
-                {note.titleJa}
-              </P>
+              <P>{note.titleJa}</P>
             </CardPrimaryContent>
           </CardPrimaryContentContainer>
-          <CardFooter className="group-hover:text-primary/70 transition-colors">
-            {note.formattedDate}
-          </CardFooter>
+          <CardFooter>{note.formattedDate}</CardFooter>
         </CardContentContainer>
         <CardSecondaryContent>
           {note.image && (

@@ -1,8 +1,8 @@
 import React from "react";
-import Link from "next/link";
 import { Page } from "contentlayer/generated";
 import { getMDXComponent } from "next-contentlayer/hooks";
 
+import { Link } from "@/components/ui/link";
 import { mdxComponents } from "@/components/mdx-components";
 import {
   Card,

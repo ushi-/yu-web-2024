@@ -1,9 +1,9 @@
 import Image from "next/image";
-import Link from "next/link";
 import type { Metadata } from "next";
 import { compareDesc } from "date-fns";
 import { allProjects, Project } from "contentlayer/generated";
 
+import { Link } from "@/components/ui/link";
 import { P } from "@/components/ui/typography";
 import Header from "@/components/header";
 import {
@@ -23,24 +23,18 @@ export const metadata: Metadata = {
 
 function ProjectCard(project: Project) {
   return (
-    <Link href={project.url} className="group">
+    <Link href={project.url} className="group text-foreground">
       <Card className="p-0 lg:p-0 flex-col-reverse lg:flex-col-reverse gap-2.5 lg:gap-2.5">
         <CardContentContainer>
           <CardPrimaryContentContainer>
             <CardPrimaryContent>
-              <P className="group-hover:text-primary/70 transition-colors">
-                {project.taglineEn}
-              </P>
+              <P>{project.taglineEn}</P>
             </CardPrimaryContent>
             <CardPrimaryContent>
-              <P className="group-hover:text-primary/70 transition-colors">
-                {project.taglineJa}
-              </P>
+              <P>{project.taglineJa}</P>
             </CardPrimaryContent>
           </CardPrimaryContentContainer>
-          <CardFooter className="group-hover:text-primary/70 transition-colors">
-            {`${project.title}, ${project.year}`}
-          </CardFooter>
+          <CardFooter>{`${project.title}, ${project.year}`}</CardFooter>
         </CardContentContainer>
         <CardSecondaryContent>
           {(project.image || project.thumbnail) && (

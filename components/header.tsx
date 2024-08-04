@@ -1,5 +1,4 @@
-import Link from "next/link";
-
+import { Link } from "@/components/ui/link";
 import { H3 } from "@/components/ui/typography";
 import {
   Card,
@@ -26,16 +25,13 @@ const Header = ({ anchors }: HeaderProps) => {
           <CardContentContainer>
             <CardPrimaryContentContainer>
               <CardPrimaryContent>
-                <Link className="hover:text-primary/70 transition-all" href="/">
+                <Link className="text-foreground" href="/">
                   <H3 className="inline font-bold">yosukeushigo.me</H3>
                 </Link>
               </CardPrimaryContent>
               <CardPrimaryContent>
                 {anchors && anchors.length > 0 && (
-                  <Link
-                    className="hover:text-primary/70 transition-all"
-                    href={anchors[0].href}
-                  >
+                  <Link className="text-foreground" href={anchors[0].href}>
                     <H3 className="inline font-bold">{anchors[0].label}</H3>
                   </Link>
                 )}
@@ -44,10 +40,7 @@ const Header = ({ anchors }: HeaderProps) => {
           </CardContentContainer>
           <CardSecondaryContent>
             {anchors && anchors.length > 1 && (
-              <Link
-                className="hover:text-primary/70 transition-all"
-                href={anchors[1].href}
-              >
+              <Link className="text-foreground" href={anchors[1].href}>
                 <H3 className="inline font-bold">{anchors[1].label}</H3>
               </Link>
             )}

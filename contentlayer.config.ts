@@ -13,7 +13,9 @@ export const Project = defineDocumentType(() => ({
     taglineJa: { type: "string", required: true },
     image: { type: "string", required: true },
     imageAlt: { type: "string", required: false },
-    imageOrientation: {
+    thumbnail: { type: "string", required: false },
+    thumbnailAlt: { type: "string", required: false },
+    thumbnailOrientation: {
       type: "enum",
       options: ["landscape", "portrait", "square"],
       default: "landscape",

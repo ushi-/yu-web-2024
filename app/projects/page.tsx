@@ -43,19 +43,28 @@ function ProjectCard(project: Project) {
           </CardFooter>
         </CardContentContainer>
         <CardSecondaryContent>
-          {project.image && (
+          {(project.image || project.thumbnail) && (
             <div
               className={cn(
                 "w-full relative overflow-hidden",
-                project.imageOrientation === "landscape" && "aspect-[16/10]",
-                project.imageOrientation === "portrait" && "aspect-[2/3]",
-                project.imageOrientation === "square" && "aspect-square"
+                project.thumbnailOrientation === "landscape" &&
+                  "aspect-[16/10]",
+                project.thumbnailOrientation === "portrait" && "aspect-[2/3]",
+                project.thumbnailOrientation === "square" && "aspect-square"
               )}
             >
               <Image
                 className=" object-cover group-hover:opacity-80 transition-opacity"
-                src={project.image}
-                alt={project.imageAlt ? project.imageAlt : project.title}
+                src={project.thumbnail ? project.thumbnail : project.image}
+                alt={
+                  project.thumbnail
+                    ? project.thumbnailAlt
+                      ? project.thumbnailAlt
+                      : project.title
+                    : project.imageAlt
+                    ? project.imageAlt
+                    : project.title
+                }
                 fill
               />
             </div>

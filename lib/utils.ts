@@ -8,12 +8,16 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function detectLang(node: ReactNode) {
+  console.log(node);
+
   const text =
     typeof node === "string"
       ? node
       : Array.isArray(node)
       ? node.find((element) => typeof element === "string")
-      : undefined;
+      : isValidElement(node)
+      ? node.props.children?.toString()
+      : null;
   return text ? franc(text, { minLength: 3, only: ["eng", "jpn"] }) : "eng";
 }
 

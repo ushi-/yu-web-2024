@@ -2,6 +2,7 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import { compareDesc } from "date-fns";
 import { allNotes, Note } from "contentlayer/generated";
+import { MoveUpRight } from "lucide-react";
 
 import { Link } from "@/components/ui/link";
 import { P } from "@/components/ui/typography";
@@ -30,10 +31,24 @@ function NoteCard(note: Note) {
         <CardContentContainer>
           <CardPrimaryContentContainer>
             <CardPrimaryContent>
-              <P>{note.titleEn}</P>
+              <P className="inline">{note.titleEn}</P>
+              {note.link && (
+                <MoveUpRight
+                  size={16}
+                  strokeWidth={1.75}
+                  className="inline ml-0.5"
+                />
+              )}
             </CardPrimaryContent>
             <CardPrimaryContent>
-              <P>{note.titleJa}</P>
+              <P className="inline">{note.titleJa}</P>
+              {note.link && (
+                <MoveUpRight
+                  size={16}
+                  strokeWidth={1.75}
+                  className="inline ml-0.5"
+                />
+              )}
             </CardPrimaryContent>
           </CardPrimaryContentContainer>
           <CardFooter>{note.formattedDate}</CardFooter>

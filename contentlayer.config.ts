@@ -51,6 +51,7 @@ export const Note = defineDocumentType(() => ({
     image: { type: "string", required: false },
     imageAlt: { type: "string", required: false },
     meta: { type: "list", of: { type: "string" }, required: false },
+    link: { type: "string", required: false },
   },
   computedFields: {
     url: {

@@ -22,7 +22,10 @@ export const metadata: Metadata = {
 
 function NoteCard(note: Note) {
   return (
-    <Link href={note.url} className="text-foreground group">
+    <Link
+      href={note.link ? note.link : note.url}
+      className="text-foreground group"
+    >
       <Card>
         <CardContentContainer>
           <CardPrimaryContentContainer>

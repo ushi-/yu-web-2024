@@ -8,8 +8,6 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function detectLang(node: ReactNode) {
-  console.log(node);
-
   const text =
     typeof node === "string"
       ? node

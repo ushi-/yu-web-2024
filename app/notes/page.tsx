@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 
 function NoteCard(note: Note) {
   const externalLink = note.link ? (
-    <div className="inline opacity-40">
+    <div className="inline text-muted-foreground group-hover:text-primary/40 transition-colors">
       <span>{getDomain(note.link)}</span>
       <MoveUpRight strokeWidth={1.75} className="inline ml-0.5 w-4 h-4" />
     </div>
@@ -63,22 +63,11 @@ function NoteCard(note: Note) {
               </CardPrimaryContentContainer>
             ) : null}
           </div>
-          <CardFooter>{note.formattedDate}</CardFooter>
+          <CardFooter className="group-hover:text-primary/70 transition-colors">
+            {note.formattedDate}
+          </CardFooter>
         </CardContentContainer>
-        <CardSecondaryContent>
-          {note.image && (
-            <div
-              className={cn("w-full relative overflow-hidden aspect-square")}
-            >
-              <Image
-                className=" object-cover group-hover:opacity-80 transition-opacity"
-                src={note.image}
-                alt={note.titleEn}
-                fill
-              />
-            </div>
-          )}
-        </CardSecondaryContent>
+        <CardSecondaryContent></CardSecondaryContent>
       </Card>
     </Link>
   );

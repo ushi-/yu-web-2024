@@ -5,7 +5,7 @@ import { allNotes, Note } from "contentlayer/generated";
 import { MoveUpRight } from "lucide-react";
 
 import { Link } from "@/components/ui/link";
-import { P } from "@/components/ui/typography";
+import { P, H1 } from "@/components/ui/typography";
 import Header from "@/components/header";
 import {
   Card,
@@ -15,13 +15,20 @@ import {
   CardSecondaryContent,
   CardFooter,
 } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
+import { cn, getDomain } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Notes",
 };
 
 function NoteCard(note: Note) {
+  const externalLink = note.link ? (
+    <div className="inline opacity-40">
+      <span>{getDomain(note.link)}</span>
+      <MoveUpRight strokeWidth={1.75} className="inline ml-0.5 w-4 h-4" />
+    </div>
+  ) : null;
+
   return (
     <Link
       href={note.link ? note.link : note.url}
@@ -29,28 +36,33 @@ function NoteCard(note: Note) {
     >
       <Card>
         <CardContentContainer>
-          <CardPrimaryContentContainer>
-            <CardPrimaryContent>
-              <P className="inline">{note.titleEn}</P>
-              {note.link && (
-                <MoveUpRight
-                  size={16}
-                  strokeWidth={1.75}
-                  className="inline ml-0.5"
-                />
-              )}
-            </CardPrimaryContent>
-            <CardPrimaryContent>
-              <P className="inline">{note.titleJa}</P>
-              {note.link && (
-                <MoveUpRight
-                  size={16}
-                  strokeWidth={1.75}
-                  className="inline ml-0.5"
-                />
-              )}
-            </CardPrimaryContent>
-          </CardPrimaryContentContainer>
+          <div className="flex flex-col gap-2.5">
+            <CardPrimaryContentContainer>
+              <CardPrimaryContent>
+                <H1>{note.titleEn}</H1>
+              </CardPrimaryContent>
+              <CardPrimaryContent>
+                <H1>{note.titleJa}</H1>
+              </CardPrimaryContent>
+            </CardPrimaryContentContainer>
+            {note.subtitleEn && note.subtitleJa ? (
+              <CardPrimaryContentContainer>
+                <CardPrimaryContent>
+                  <P className="inline mr-2">{note.subtitleEn}</P>
+                  {externalLink}
+                </CardPrimaryContent>
+                <CardPrimaryContent>
+                  <P className="inline mr-2">{note.subtitleJa}</P>
+                  {externalLink}
+                </CardPrimaryContent>
+              </CardPrimaryContentContainer>
+            ) : externalLink ? (
+              <CardPrimaryContentContainer>
+                <CardPrimaryContent>{externalLink}</CardPrimaryContent>
+                <CardPrimaryContent>{externalLink}</CardPrimaryContent>
+              </CardPrimaryContentContainer>
+            ) : null}
+          </div>
           <CardFooter>{note.formattedDate}</CardFooter>
         </CardContentContainer>
         <CardSecondaryContent>

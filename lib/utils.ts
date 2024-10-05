@@ -58,3 +58,9 @@ export const sliceChildren = (
 };
 
 export type Language = "en" | "ja";
+
+export function getDomain(url: string): string {
+  const hostname = new URL(url).hostname;
+  const parts = hostname.split(".").slice(-2);
+  return parts.join(".");
+}

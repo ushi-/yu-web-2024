@@ -127,9 +127,22 @@ Ulist.displayName = "Ulist";
 export const ListItem = React.forwardRef<
   HTMLLIElement,
   React.ComponentProps<"li">
->(({ className, ...props }, ref) => (
-  <li className={cn("before:content-['–_']", className)} ref={ref} {...props} />
-));
+>(({ className, children, ...props }, ref) => {
+  let lang = detectLang(children);
+  return (
+    <li
+      className={cn(
+        "before:content-['–_']",
+        lang === "jpn" && "text-base-ja font-ja font-medium indent-[-0.85em]",
+        className
+      )}
+      ref={ref}
+      {...props}
+    >
+      {children}
+    </li>
+  );
+});
 ListItem.displayName = "ListItem";
 
 interface HeroProps extends React.ComponentProps<"span"> {

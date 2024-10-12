@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 function NoteCard(note: Note) {
   const externalLink = note.link ? (
     <div className="inline text-muted-foreground group-hover:text-primary/40 transition-colors">
-      <span>{getDomain(note.link)}</span>
+      <span className="">{getDomain(note.link)}</span>
       <MoveUpRight strokeWidth={1.75} className="inline ml-0.5 w-4 h-4" />
     </div>
   ) : null;
@@ -36,30 +36,45 @@ function NoteCard(note: Note) {
     >
       <Card>
         <CardContentContainer>
-          <div className="flex flex-col gap-2.5">
+          <div className="flex flex-col gap-1">
             <CardPrimaryContentContainer>
               <CardPrimaryContent>
-                <H1>{note.titleEn}</H1>
+                {(note.language === "en" || note.language === "en+ja") && (
+                  <H1>{note.titleEn}</H1>
+                )}
               </CardPrimaryContent>
               <CardPrimaryContent>
-                <H1>{note.titleJa}</H1>
+                {(note.language === "ja" || note.language === "en+ja") && (
+                  <H1>{note.titleJa}</H1>
+                )}
               </CardPrimaryContent>
             </CardPrimaryContentContainer>
-            {note.subtitleEn && note.subtitleJa ? (
+            {(note.subtitleEn || note.subtitleJa) && (
               <CardPrimaryContentContainer>
                 <CardPrimaryContent>
-                  <P className="inline mr-2">{note.subtitleEn}</P>
-                  {externalLink}
+                  {(note.language === "en" || note.language === "en+ja") &&
+                    note.subtitleEn && (
+                      <P className="inline mr-2">{note.subtitleEn}</P>
+                    )}
                 </CardPrimaryContent>
                 <CardPrimaryContent>
-                  <P className="inline mr-2">{note.subtitleJa}</P>
-                  {externalLink}
+                  {(note.language === "ja" || note.language === "en+ja") &&
+                    note.subtitleJa && (
+                      <P className="inline mr-2">{note.subtitleJa}</P>
+                    )}
                 </CardPrimaryContent>
               </CardPrimaryContentContainer>
-            ) : externalLink ? (
+            )}
+            {externalLink ? (
               <CardPrimaryContentContainer>
-                <CardPrimaryContent>{externalLink}</CardPrimaryContent>
-                <CardPrimaryContent>{externalLink}</CardPrimaryContent>
+                <CardPrimaryContent>
+                  {(note.language === "en" || note.language === "en+ja") &&
+                    externalLink}
+                </CardPrimaryContent>
+                <CardPrimaryContent>
+                  {(note.language === "ja" || note.language === "en+ja") &&
+                    externalLink}
+                </CardPrimaryContent>
               </CardPrimaryContentContainer>
             ) : null}
           </div>

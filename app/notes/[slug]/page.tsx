@@ -12,10 +12,11 @@ import {
   CardPrimaryContent,
   CardPrimaryContentContainer,
   CardSecondaryContent,
+  CardFooter,
 } from "@/components/ui/card";
 import { mdxComponents } from "@/components/mdx-components";
 import BilingualSection from "@/components/bilingual-section";
-import { H1, H3 } from "@/components/ui/typography";
+import { H1, H3, P } from "@/components/ui/typography";
 import { Link } from "@/components/ui/link";
 
 export const generateStaticParams = async () =>
@@ -88,29 +89,77 @@ export default async function Page({ params }: { params: { slug: string } }) {
           <div className="w-full aspect-video relative">
             <Image
               src={post.image}
-              alt={post.titleEn}
+              alt={
+                post.imageAlt
+                  ? post.imageAlt
+                  : post.titleEn
+                  ? post.titleEn
+                  : post.titleJa
+                  ? post.titleJa
+                  : ""
+              }
               fill
               className="object-cover"
             />
           </div>
         </Card>
       )}
-      <BilingualSection padded className="gap-2.5">
-        <H1>{post.titleEn}</H1>
-        <H1>{post.titleJa}</H1>
-        <div className="flex flex-col">
-          <H3 className="text-muted-foreground">{post.formattedDate}</H3>
-          {post.meta &&
-            post.meta.map((meta) => (
-              <H3 key={meta} className="text-muted-foreground">
-                {meta}
-              </H3>
-            ))}
-        </div>
-      </BilingualSection>
+      <Card>
+        <CardContentContainer>
+          <div className="flex flex-col gap-1">
+            <CardPrimaryContentContainer>
+              {(post.language === "en" || post.language === "en+ja") && (
+                <CardPrimaryContent>
+                  <H1>{post.titleEn}</H1>
+                </CardPrimaryContent>
+              )}
+              {(post.language === "ja" || post.language === "en+ja") && (
+                <CardPrimaryContent>
+                  <H1>{post.titleJa}</H1>
+                </CardPrimaryContent>
+              )}
+            </CardPrimaryContentContainer>
+            {(post.subtitleEn || post.subtitleJa) && (
+              <CardPrimaryContentContainer>
+                {(post.language === "en" || post.language === "en+ja") &&
+                  post.subtitleEn && (
+                    <CardPrimaryContent>
+                      <P className="inline mr-2">{post.subtitleEn}</P>
+                    </CardPrimaryContent>
+                  )}
+                {(post.language === "ja" || post.language === "en+ja") &&
+                  post.subtitleJa && (
+                    <CardPrimaryContent>
+                      <P className="inline mr-2">{post.subtitleJa}</P>
+                    </CardPrimaryContent>
+                  )}
+              </CardPrimaryContentContainer>
+            )}
+          </div>
+          <CardFooter className="group-hover:text-primary/70 transition-colors">
+            {post.formattedDate}
+          </CardFooter>
+        </CardContentContainer>
+        <CardSecondaryContent>
+          <div className="flex flex-col">
+            {post.meta &&
+              post.meta.map((meta) => (
+                <H3 key={meta} className="text-muted-foreground">
+                  {meta}
+                </H3>
+              ))}
+          </div>
+        </CardSecondaryContent>
+      </Card>
       <div className="p-2.5 lg:p-5">
         <MDXContent components={mdxComponents} />
       </div>
+      <Card>
+        <CardContentContainer>
+          <CardFooter></CardFooter>
+        </CardContentContainer>
+        <CardSecondaryContent />
+      </Card>
       <Card>
         <CardContentContainer>
           <CardPrimaryContentContainer>

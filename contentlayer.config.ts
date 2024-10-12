@@ -45,8 +45,10 @@ export const Note = defineDocumentType(() => ({
   filePathPattern: `notes/*/*.mdx`,
   contentType: "mdx",
   fields: {
-    titleEn: { type: "string", required: true },
-    titleJa: { type: "string", required: true },
+    slug: { type: "string", required: true },
+    language: { type: "enum", options: ["en", "ja", "en+ja"], required: true },
+    titleEn: { type: "string", required: false },
+    titleJa: { type: "string", required: false },
     subtitleEn: { type: "string", required: false },
     subtitleJa: { type: "string", required: false },
     date: { type: "date", required: true },
@@ -58,11 +60,7 @@ export const Note = defineDocumentType(() => ({
   computedFields: {
     url: {
       type: "string",
-      resolve: (post) => `/notes/${slugify(post.titleEn, { lower: true })}`,
-    },
-    slug: {
-      type: "string",
-      resolve: (post) => slugify(post.titleEn, { lower: true }),
+      resolve: (post) => `/notes/${post.slug}`,
     },
     formattedDate: {
       type: "string",

@@ -72,7 +72,7 @@ const CardFooter = React.forwardRef<
     )}
     {...props}
   >
-    {children && <div className="flex-1 bg-border h-[1px]" />}
+    <div className="flex-1 bg-border h-[1px]" />
     {children}
   </div>
 ));

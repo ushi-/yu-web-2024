@@ -43,7 +43,7 @@ const PageNavigation = ({
                 className="hover:text-primary/70 transition-colors"
                 href={page.url}
               >
-                {page.title}
+                {page.title.toLowerCase()}
               </Link>
             </CardFooter>
           )}

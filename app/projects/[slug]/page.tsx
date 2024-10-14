@@ -6,6 +6,7 @@ import { getMDXComponent } from "next-contentlayer/hooks";
 import Image from "next/image";
 import type { Metadata } from "next";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { compareDesc } from "date-fns";
 
 import Header from "@/components/header";
 import {
@@ -14,6 +15,7 @@ import {
   CardPrimaryContent,
   CardPrimaryContentContainer,
   CardSecondaryContent,
+  CardFooter,
 } from "@/components/ui/card";
 import { mdxComponents } from "@/components/mdx-components";
 import BilingualSection from "@/components/bilingual-section";
@@ -21,8 +23,12 @@ import { H1, H3 } from "@/components/ui/typography";
 import VideoPlayer from "@/components/video-player";
 import { Link } from "@/components/ui/link";
 
-export const generateStaticParams = async () =>
-  allProjects.map((post) => ({ slug: post.slug }));
+export const generateStaticParams = async () => {
+  const sortedProjects = allProjects.sort((a, b) =>
+    compareDesc(a.date, b.date)
+  );
+  return sortedProjects.map((post) => ({ slug: post.slug }));
+};
 
 export const generateMetadata = ({
   params,
@@ -52,17 +58,23 @@ export const generateMetadata = ({
 };
 
 export default async function Page({ params }: { params: { slug: string } }) {
+  const sortedProjects = allProjects.sort((a, b) =>
+    compareDesc(a.date, b.date)
+  );
+
   // Find the post for the current page.
-  const post = allProjects.find((post) => post.slug === params.slug);
+  const post = sortedProjects.find((post) => post.slug === params.slug);
 
   // 404 if the post does not exist.
   if (!post) notFound();
 
-  const prevPostIndex = allProjects.indexOf(post) - 1;
-  const prevPost = prevPostIndex >= 0 ? allProjects.at(prevPostIndex) : null;
-  const nextPostIndex = allProjects.indexOf(post) + 1;
+  const prevPostIndex = sortedProjects.indexOf(post) - 1;
+  const prevPost = prevPostIndex >= 0 ? sortedProjects.at(prevPostIndex) : null;
+  const nextPostIndex = sortedProjects.indexOf(post) + 1;
   const nextPost =
-    nextPostIndex < allProjects.length ? allProjects.at(nextPostIndex) : null;
+    nextPostIndex < sortedProjects.length
+      ? sortedProjects.at(nextPostIndex)
+      : null;
 
   // Parse the MDX file via the useMDXComponent hook.
   const MDXContent = getMDXComponent(post.body.code);
@@ -84,22 +96,39 @@ export default async function Page({ params }: { params: { slug: string } }) {
           )}
         </div>
       </Card>
-      <BilingualSection padded className="gap-2.5">
-        <H1>{post.taglineEn}</H1>
-        <H1>{post.taglineJa}</H1>
-        <div className="flex flex-col">
-          <H3 className="text-muted-foreground">{`${post.title}, ${post.year}`}</H3>
-          {post.meta &&
-            post.meta.map((meta) => (
-              <H3 key={meta} className="text-muted-foreground">
-                {meta}
-              </H3>
-            ))}
-        </div>
-      </BilingualSection>
+      <Card className="">
+        <CardContentContainer>
+          <CardPrimaryContentContainer>
+            <CardPrimaryContent>
+              <H1>{post.taglineEn}</H1>
+            </CardPrimaryContent>
+            <CardPrimaryContent>
+              <H1>{post.taglineJa}</H1>
+            </CardPrimaryContent>
+          </CardPrimaryContentContainer>
+          <CardFooter>{`${post.title}, ${post.year}`}</CardFooter>
+        </CardContentContainer>
+        <CardSecondaryContent className="font-condensed text-muted-foreground">
+          <div className="flex flex-col">
+            {post.meta &&
+              post.meta.map((meta) => (
+                <H3 key={meta} className="text-muted-foreground">
+                  {meta}
+                </H3>
+              ))}
+          </div>
+        </CardSecondaryContent>
+      </Card>
+
       <div className="p-2.5 lg:p-5">
         <MDXContent components={mdxComponents} />
       </div>
+      <Card>
+        <CardContentContainer>
+          <CardFooter></CardFooter>
+        </CardContentContainer>
+        <CardSecondaryContent />
+      </Card>
       <Card>
         <CardContentContainer>
           <CardPrimaryContentContainer>

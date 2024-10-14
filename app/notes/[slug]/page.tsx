@@ -4,6 +4,7 @@ import { getMDXComponent } from "next-contentlayer/hooks";
 import Image from "next/image";
 import type { Metadata } from "next";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { compareDesc } from "date-fns";
 
 import Header from "@/components/header";
 import {
@@ -19,8 +20,10 @@ import BilingualSection from "@/components/bilingual-section";
 import { H1, H3, P } from "@/components/ui/typography";
 import { Link } from "@/components/ui/link";
 
-export const generateStaticParams = async () =>
-  allNotes.map((post) => ({ slug: post.slug }));
+export const generateStaticParams = async () => {
+  const sortedNotes = allNotes.sort((a, b) => compareDesc(a.date, b.date));
+  return sortedNotes.map((post) => ({ slug: post.slug }));
+};
 
 export const generateMetadata = ({
   params,
@@ -62,8 +65,9 @@ export const generateMetadata = ({
 };
 
 export default async function Page({ params }: { params: { slug: string } }) {
+  const sortedNotes = allNotes.sort((a, b) => compareDesc(a.date, b.date));
   // Find the post for the current page.
-  const post = allNotes.find((post) => post.slug === params.slug);
+  const post = sortedNotes.find((post) => post.slug === params.slug);
 
   // 404 if the post does not exist.
   if (!post) notFound();
@@ -72,11 +76,11 @@ export default async function Page({ params }: { params: { slug: string } }) {
     redirect(post.link);
   }
 
-  const prevPostIndex = allNotes.indexOf(post) - 1;
-  const prevPost = prevPostIndex >= 0 ? allNotes.at(prevPostIndex) : null;
-  const nextPostIndex = allNotes.indexOf(post) + 1;
+  const prevPostIndex = sortedNotes.indexOf(post) - 1;
+  const prevPost = prevPostIndex >= 0 ? sortedNotes.at(prevPostIndex) : null;
+  const nextPostIndex = sortedNotes.indexOf(post) + 1;
   const nextPost =
-    nextPostIndex < allNotes.length ? allNotes.at(nextPostIndex) : null;
+    nextPostIndex < sortedNotes.length ? sortedNotes.at(nextPostIndex) : null;
 
   // Parse the MDX file via the useMDXComponent hook.
   const MDXContent = getMDXComponent(post.body.code);
@@ -165,7 +169,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
           <CardPrimaryContentContainer>
             <CardPrimaryContent>
               {prevPost && (
-                <Link href={prevPost.url}>
+                <Link href={prevPost.link ? prevPost.link : prevPost.url}>
                   <div className="flex gap-1 items-middle">
                     <ArrowLeft size={20} strokeWidth={1.5} />
                     Previous note
@@ -175,7 +179,10 @@ export default async function Page({ params }: { params: { slug: string } }) {
             </CardPrimaryContent>
             <CardPrimaryContent>
               {nextPost && (
-                <Link href={nextPost.url} className="flex justify-end">
+                <Link
+                  href={nextPost.link ? nextPost.link : nextPost.url}
+                  className="flex justify-end"
+                >
                   <div className="flex gap-1 items-middle">
                     Next note
                     <ArrowRight size={20} strokeWidth={1.5} />

@@ -34,7 +34,7 @@ function ProjectCard(project: Project) {
               <P>{project.taglineJa}</P>
             </CardPrimaryContent>
           </CardPrimaryContentContainer>
-          <CardFooter>{`${project.title}, ${project.year}`}</CardFooter>
+          <CardFooter className="group-hover:text-primary/70 transition-colors">{`${project.title}, ${project.year}`}</CardFooter>
         </CardContentContainer>
         <CardSecondaryContent>
           {(project.image || project.thumbnail) && (

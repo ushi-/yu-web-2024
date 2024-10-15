@@ -16,16 +16,21 @@ import {
 type PageNavigationProps = {
   page: Page;
   showAboutLink?: boolean;
+  secondaryContent?: React.ReactNode;
 };
 
 const PageNavigation = ({
   page,
   showAboutLink = true,
+  secondaryContent = null,
 }: PageNavigationProps) => {
   const MDXContentEn = getMDXComponent(page.descriptionEn.code);
   const MDXContentJa = getMDXComponent(page.descriptionJa.code);
   return (
-    <Card key={page.slug} className="[&:not(:first-child)]:mt-5 py-0 lg:py-0">
+    <Card
+      key={page.slug}
+      className="[&:not(:first-child)]:mt-5 py-0 lg:py-0 flex-col-reverse gap-5"
+    >
       <CardContentContainer>
         <CardPrimaryContentContainer>
           <CardPrimaryContent>
@@ -48,7 +53,7 @@ const PageNavigation = ({
             </CardFooter>
           )}
       </CardContentContainer>
-      <CardSecondaryContent className="font-condensed"></CardSecondaryContent>
+      <CardSecondaryContent>{secondaryContent}</CardSecondaryContent>
     </Card>
   );
 };

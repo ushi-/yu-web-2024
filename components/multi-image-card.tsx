@@ -21,14 +21,14 @@ const MultiImageCard = ({ children }: { children: React.ReactNode }) => {
   }, [images.length]);
 
   return (
-    <Card className="p-0 lg:py-0">
+    <Card className="p-0 ">
       <div className="relative w-full aspect-video">
         <AnimatePresence>
           {images.map((image, i) =>
             index === i ? (
               <motion.div
                 key={i}
-                className="absolute inset-0 overflow-hidden"
+                className="absolute inset-0 overflow-hidden aspect-auto "
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}

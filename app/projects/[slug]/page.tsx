@@ -18,7 +18,6 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import { mdxComponents } from "@/components/mdx-components";
-import BilingualSection from "@/components/bilingual-section";
 import { H1, H3 } from "@/components/ui/typography";
 import VideoPlayer from "@/components/video-player";
 import { Link } from "@/components/ui/link";

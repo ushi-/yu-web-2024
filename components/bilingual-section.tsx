@@ -25,11 +25,12 @@ const BilingualSection = ({
     React.Children.toArray(children);
   return (
     <Card
-      className={cn([
+      className={cn(
+        "gap-2.5",
         !padded &&
           "px-0 lg:px-0 pt-0 lg:pt-0 last-of-type:pb-0 last-of-type:lg:pb-0",
-        className,
-      ])}
+        className
+      )}
     >
       <CardContentContainer>
         <CardPrimaryContentContainer>

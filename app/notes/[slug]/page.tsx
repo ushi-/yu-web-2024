@@ -16,7 +16,6 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import { mdxComponents } from "@/components/mdx-components";
-import BilingualSection from "@/components/bilingual-section";
 import { H1, H3, P } from "@/components/ui/typography";
 import { Link } from "@/components/ui/link";
 

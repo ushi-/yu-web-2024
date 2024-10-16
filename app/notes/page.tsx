@@ -1,4 +1,3 @@
-import Image from "next/image";
 import type { Metadata } from "next";
 import { compareDesc } from "date-fns";
 import { allNotes, Note } from "contentlayer/generated";
@@ -15,7 +14,7 @@ import {
   CardSecondaryContent,
   CardFooter,
 } from "@/components/ui/card";
-import { cn, getDomain } from "@/lib/utils";
+import { getDomain } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Notes",

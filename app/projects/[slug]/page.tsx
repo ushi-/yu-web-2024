@@ -91,6 +91,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
               alt={post.imageAlt ? post.imageAlt : post.title}
               fill
               className="object-cover"
+              placeholder="blur"
+              blurDataURL={post.imagePlaceholderData}
             />
           )}
         </div>

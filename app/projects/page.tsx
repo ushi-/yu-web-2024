@@ -60,6 +60,12 @@ function ProjectCard(project: Project) {
                     : project.title
                 }
                 fill
+                placeholder="blur"
+                blurDataURL={
+                  project.thumbnail
+                    ? project.thumbnailPlaceholderData
+                    : project.imagePlaceholderData
+                }
               />
             </div>
           )}

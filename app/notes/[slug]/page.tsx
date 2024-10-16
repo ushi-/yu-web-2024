@@ -103,6 +103,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
               }
               fill
               className="object-cover"
+              placeholder="blur"
+              blurDataURL={post.imagePlaceholderData}
             />
           </div>
         </Card>

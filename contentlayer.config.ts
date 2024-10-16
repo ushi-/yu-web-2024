@@ -1,6 +1,8 @@
 import { defineDocumentType, makeSource } from "contentlayer/source-files";
 import slugify from "slugify";
 import { format } from "date-fns";
+import fs from "node:fs/promises";
+import { getPlaiceholder } from "plaiceholder";
 
 export const Project = defineDocumentType(() => ({
   name: "Project",
@@ -37,6 +39,23 @@ export const Project = defineDocumentType(() => ({
       type: "string",
       resolve: (post) => format(new Date(post.date), "yyyy"),
     },
+    imagePlaceholderData: {
+      type: "string",
+      resolve: async (post) => {
+        const file = await fs.readFile(`./public${post.image}`);
+        const { base64 } = await getPlaiceholder(file);
+        return base64;
+      },
+    },
+    thumbnailPlaceholderData: {
+      type: "string",
+      resolve: async (post) => {
+        if (post.thumbnail === undefined) return null;
+        const file = await fs.readFile(`./public${post.thumbnail}`);
+        const { base64 } = await getPlaiceholder(file);
+        return base64;
+      },
+    },
   },
 }));
 
@@ -65,6 +84,15 @@ export const Note = defineDocumentType(() => ({
     formattedDate: {
       type: "string",
       resolve: (post) => format(new Date(post.date), "yyyy-MM-dd"),
+    },
+    imagePlaceholderData: {
+      type: "string",
+      resolve: async (post) => {
+        if (post.image === undefined) return null;
+        const file = await fs.readFile(`./public${post.image}`);
+        const { base64 } = await getPlaiceholder(file);
+        return base64;
+      },
     },
   },
 }));

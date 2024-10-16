@@ -23,7 +23,6 @@ export const mdxComponents: MDXComponents = {
       className="object-cover"
       width={1280}
       height={1280}
-      placeholder="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAQSURBVHgBAQUA+v8A2dnZ/wilA4uGqHiAAAAAAElFTkSuQmCC"
       {...(props as ImageProps)}
     />
   ),

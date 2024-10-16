@@ -17,16 +17,14 @@ export const mdxComponents: MDXComponents = {
   ul: ({ children }) => <Ulist>{children}</Ulist>,
   li: ({ children }) => <ListItem>{children}</ListItem>,
   a: ({ href, children }) => <Link href={href as string}>{children}</Link>,
-  img: ({ src, ...props }) => {
-    return (
-      /* eslint-disable-next-line jsx-a11y/alt-text*/
-      <Image
-        className="object-cover"
-        width={1280}
-        height={1280}
-        placeholder="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E"
-        {...(props as ImageProps)}
-      />
-    );
-  },
+  img: (props) => (
+    /* eslint-disable-next-line jsx-a11y/alt-text*/
+    <Image
+      className="object-cover"
+      width={1280}
+      height={1280}
+      placeholder="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAQSURBVHgBAQUA+v8A2dnZ/wilA4uGqHiAAAAAAElFTkSuQmCC"
+      {...(props as ImageProps)}
+    />
+  ),
 };

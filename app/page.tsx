@@ -24,11 +24,10 @@ export default function Home() {
                 src={image.src}
                 alt={image.alt}
                 fill
-                className="object-cover"
+                className="object-cover transition-opacity duration-300"
                 placeholder="blur"
                 blurDataURL={page.heroImagesPlaceholderData[i]}
                 priority
-                style={{ transition: "opacity 0.3s" }}
               />
             ))}
           </MultiImageCard>

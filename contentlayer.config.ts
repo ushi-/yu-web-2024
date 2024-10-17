@@ -1,4 +1,8 @@
-import { defineDocumentType, makeSource } from "contentlayer/source-files";
+import {
+  defineDocumentType,
+  defineNestedType,
+  makeSource,
+} from "contentlayer/source-files";
 import slugify from "slugify";
 import { format } from "date-fns";
 import fs from "node:fs/promises";
@@ -97,6 +101,20 @@ export const Note = defineDocumentType(() => ({
   },
 }));
 
+const Image = defineNestedType(() => ({
+  name: "Image",
+  fields: {
+    src: {
+      type: "string",
+      required: true,
+    },
+    alt: {
+      type: "string",
+      required: true,
+    },
+  },
+}));
+
 export const Page = defineDocumentType(() => ({
   name: "Page",
   filePathPattern: `*/index.mdx`,
@@ -106,6 +124,7 @@ export const Page = defineDocumentType(() => ({
     order: { type: "number", required: true },
     descriptionEn: { type: "mdx", required: true },
     descriptionJa: { type: "mdx", required: true },
+    heroImages: { type: "list", of: Image, required: false },
   },
   computedFields: {
     url: {
@@ -115,6 +134,26 @@ export const Page = defineDocumentType(() => ({
     slug: {
       type: "string",
       resolve: (post) => slugify(post.title, { lower: true }),
+    },
+    heroImagesPlaceholderData: {
+      type: "list",
+      of: { type: "string" },
+      resolve: async (post) => {
+        if (post.heroImages === undefined) return null;
+        // the list created by Contentlayer is not an array,
+        // so we need to cast it to an array to access
+        // _array property and use map method
+        const heroImages = post.heroImages as any;
+        if (heroImages === undefined) return null;
+        const placeholderData = await Promise.all(
+          heroImages._array.map(async (image: { src: string }) => {
+            const file = await fs.readFile(`./public${image.src}`);
+            const { base64 } = await getPlaiceholder(file);
+            return base64;
+          })
+        );
+        return placeholderData;
+      },
     },
   },
 }));

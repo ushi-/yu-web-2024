@@ -2,32 +2,38 @@
 
 import React from "react";
 import { allPages } from "contentlayer/generated";
-import { getMDXComponent } from "next-contentlayer/hooks";
+import Image from "next/image";
 
 import Header from "@/components/header";
 import PageNavigation from "@/components/page-navigation";
-import { mdxComponents } from "@/components/mdx-components";
+import MultiImageCard from "@/components/multi-image-card";
 
 export default function Home() {
   const pages = allPages.sort((a, b) => a.order - b.order);
-  const page = allPages.find((page) => page.slug === "home");
-  if (!page) return null;
-  const MDXContent = getMDXComponent(page.body.code);
-  const homeSecondaryContent = <MDXContent components={mdxComponents} />;
+  const page = pages.find((page) => page.slug === "home");
 
   return (
     <>
       <Header />
       <main className="">
-        {homeSecondaryContent}
+        {page?.heroImages && (
+          <MultiImageCard>
+            {page.heroImages.map((image, i) => (
+              <Image
+                key={image.src}
+                src={image.src}
+                alt={image.alt}
+                fill
+                className="object-cover"
+                placeholder="blur"
+                blurDataURL={page.heroImagesPlaceholderData[i]}
+              />
+            ))}
+          </MultiImageCard>
+        )}
+
         {pages.map((page) => (
-          <PageNavigation
-            key={page.slug}
-            page={page}
-            // secondaryContent={
-            //   page.slug === "home" ? homeSecondaryContent : null
-            // }
-          />
+          <PageNavigation key={page.slug} page={page} />
         ))}
       </main>
     </>

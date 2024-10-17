@@ -20,7 +20,7 @@ export const mdxComponents: MDXComponents = {
   img: (props) => (
     /* eslint-disable-next-line jsx-a11y/alt-text*/
     <Image
-      className="object-cover"
+      className="object-cover transition-opacity duration-300"
       width={1280}
       height={1280}
       {...(props as ImageProps)}

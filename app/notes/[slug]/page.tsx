@@ -102,7 +102,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
                   : ""
               }
               fill
-              className="object-cover"
+              className="object-cover transition-opacity duration-300"
               placeholder="blur"
               blurDataURL={post.imagePlaceholderData}
             />

@@ -90,7 +90,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
               src={post.image}
               alt={post.imageAlt ? post.imageAlt : post.title}
               fill
-              className="object-cover"
+              className="object-cover transition-opacity duration-300"
               placeholder="blur"
               blurDataURL={post.imagePlaceholderData}
             />

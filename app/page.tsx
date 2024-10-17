@@ -27,6 +27,8 @@ export default function Home() {
                 className="object-cover"
                 placeholder="blur"
                 blurDataURL={page.heroImagesPlaceholderData[i]}
+                priority
+                style={{ transition: "opacity 0.3s" }}
               />
             ))}
           </MultiImageCard>

@@ -23,6 +23,9 @@ export const metadata: Metadata = {
     title: "Projects | Yosuke Ushigome",
     url: "https://www.yosukeushigo.me/projects",
   },
+  twitter: {
+    title: "Projects | Yosuke Ushigome",
+  },
 };
 
 function ProjectCard(project: Project) {

@@ -49,8 +49,8 @@ export const generateMetadata = ({
       type: "article",
     },
     twitter: {
-      card: "summary_large_image",
-      creator: "@ushi_",
+      title: `${post.title} | Yosuke Ushigome`,
+      description: post.taglineEn,
       images: [`https://yosukeushigo.me${post.image}`],
     },
   };

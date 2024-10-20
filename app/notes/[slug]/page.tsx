@@ -45,7 +45,7 @@ export const generateMetadata = ({
     description,
     openGraph: {
       title: `${title} | Yosuke Ushigome`,
-      description: description,
+      description,
       url: post.url,
       images: post.image
         ? [
@@ -54,13 +54,13 @@ export const generateMetadata = ({
               alt: imageAlt,
             },
           ]
-        : [],
+        : undefined,
       type: "article",
     },
     twitter: {
-      card: "summary",
-      creator: "@ushi_",
-      images: post.image ? [`https://yosukeushigo.me${post.image}`] : [],
+      title: `${title} | Yosuke Ushigome`,
+      description,
+      images: post.image ? [`https://yosukeushigo.me${post.image}`] : undefined,
     },
   };
 };

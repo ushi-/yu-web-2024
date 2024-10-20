@@ -55,6 +55,13 @@ export const metadata: Metadata = {
     locale: "en_GP",
     type: "website",
   },
+  twitter: {
+    title: "Yosuke Ushigome",
+    description:
+      "I'm Yosuke Ushigome (yōs-ké • he/him), a London-based designer / technologist.",
+    card: "summary_large_image",
+    creator: "@ushi_",
+  },
   alternates: {
     types: {
       "application/rss+xml": "https://yosukeushigo.me/feed.xml",

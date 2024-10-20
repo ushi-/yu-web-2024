@@ -31,34 +31,36 @@ export const generateMetadata = ({
 }): Metadata => {
   const post = allNotes.find((post) => post.slug === params.slug);
   if (!post) throw new Error(`Post not found for slug: ${params.slug}`);
+  const title = post.titleEn ? post.titleEn : post.titleJa;
+  const description = post.subtitleEn ? post.subtitleEn : post.subtitleJa;
+  const imageAlt = post.imageAlt
+    ? post.imageAlt
+    : post.titleEn
+    ? post.titleEn
+    : post.titleJa
+    ? post.titleJa
+    : "";
   return {
-    title: post.titleEn,
-    description: post.formattedDate,
+    title,
+    description,
     openGraph: {
-      title: `${post.titleEn} | Yosuke Ushigome`,
-      description: post.formattedDate,
+      title: `${title} | Yosuke Ushigome`,
+      description: description,
       url: post.url,
       images: post.image
         ? [
             {
               url: post.image,
-              alt: post.imageAlt ? post.imageAlt : post.titleEn,
+              alt: imageAlt,
             },
           ]
         : [],
       type: "article",
     },
     twitter: {
-      card: "summary_large_image",
+      card: "summary",
       creator: "@ushi_",
-      images: post.image
-        ? [
-            {
-              url: post.image,
-              alt: post.imageAlt ? post.imageAlt : post.titleEn,
-            },
-          ]
-        : [],
+      images: post.image ? [`https://yosukeushigo.me${post.image}`] : [],
     },
   };
 };

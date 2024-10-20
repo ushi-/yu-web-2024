@@ -18,6 +18,10 @@ import { getDomain } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Notes",
+  openGraph: {
+    title: "Notes | Yosuke Ushigome",
+    url: "https://www.yosukeushigo.me/notes",
+  },
 };
 
 function NoteCard(note: Note) {

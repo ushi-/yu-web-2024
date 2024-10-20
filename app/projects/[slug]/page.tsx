@@ -51,7 +51,7 @@ export const generateMetadata = ({
     twitter: {
       card: "summary_large_image",
       creator: "@ushi_",
-      images: [post.image],
+      images: [`https://yosukeushigo.me${post.image}`],
     },
   };
 };

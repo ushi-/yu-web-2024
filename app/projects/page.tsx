@@ -19,6 +19,10 @@ import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Projects",
+  openGraph: {
+    title: "Projects | Yosuke Ushigome",
+    url: "https://www.yosukeushigo.me/projects",
+  },
 };
 
 function ProjectCard(project: Project) {

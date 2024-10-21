@@ -89,7 +89,7 @@ export default function Home() {
 
   return (
     <>
-      <Header anchors={[{ label: "projects", href: "/projects" }]} />
+      <Header currentUrl="/projects" />
       <main>
         <div className="px-2.5 lg:px-5 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 items-start gap-10 lg:gap-x-5">
           {projects.map((project, idx) => (

@@ -101,7 +101,7 @@ export default function Home() {
 
   return (
     <main>
-      <Header anchors={[{ label: "notes", href: "/notes" }]} />
+      <Header currentUrl="/notes" />
       {notes.map((note, idx) => (
         <NoteCard key={idx} {...note} />
       ))}

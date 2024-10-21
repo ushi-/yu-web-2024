@@ -1,3 +1,5 @@
+import { allPages, Page } from "contentlayer/generated";
+
 import { Link } from "@/components/ui/link";
 import { H3 } from "@/components/ui/typography";
 import {
@@ -6,18 +8,17 @@ import {
   CardPrimaryContent,
   CardPrimaryContentContainer,
   CardSecondaryContent,
-} from "./ui/card";
-
-interface Anchor {
-  label: string;
-  href: string;
-}
+} from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 
 export interface HeaderProps {
-  anchors?: Anchor[];
+  currentUrl?: string;
 }
 
-const Header = ({ anchors }: HeaderProps) => {
+const Header = ({ currentUrl = "/" }: HeaderProps) => {
+  const pages = allPages
+    .sort((a, b) => a.order - b.order)
+    .filter((page) => page.slug !== "home" && page.slug !== "contact");
   return (
     <header>
       <nav>
@@ -25,26 +26,48 @@ const Header = ({ anchors }: HeaderProps) => {
           <CardContentContainer>
             <CardPrimaryContentContainer>
               <CardPrimaryContent>
-                <Link className="text-foreground" href="/">
+                <Link
+                  className={cn(
+                    "text-foreground",
+                    currentUrl === "/"
+                      ? "pointer-events-none"
+                      : "pointer-events-auto"
+                  )}
+                  href="/"
+                >
                   <H3 className="inline font-bold">yosukeushigo.me</H3>
                 </Link>
               </CardPrimaryContent>
               <CardPrimaryContent>
-                {anchors && anchors.length > 0 && (
-                  <Link className="text-foreground" href={anchors[0].href}>
-                    <H3 className="inline font-bold">{anchors[0].label}</H3>
-                  </Link>
+                {pages && pages.length > 0 && (
+                  <div className="flex gap-4">
+                    {pages.map((page) => (
+                      <Link
+                        key={page.slug}
+                        className={cn(
+                          "text-foreground",
+                          currentUrl === page.url
+                            ? "pointer-events-none"
+                            : "pointer-events-auto"
+                        )}
+                        href={page.url}
+                      >
+                        <H3
+                          className={cn(
+                            "inline font-bold",
+                            currentUrl === page.url && "text-muted-foreground"
+                          )}
+                        >
+                          {page.title.toLowerCase()}
+                        </H3>
+                      </Link>
+                    ))}
+                  </div>
                 )}
               </CardPrimaryContent>
             </CardPrimaryContentContainer>
           </CardContentContainer>
-          <CardSecondaryContent>
-            {anchors && anchors.length > 1 && (
-              <Link className="text-foreground" href={anchors[1].href}>
-                <H3 className="inline font-bold">{anchors[1].label}</H3>
-              </Link>
-            )}
-          </CardSecondaryContent>
+          <CardSecondaryContent />
         </Card>
       </nav>
     </header>

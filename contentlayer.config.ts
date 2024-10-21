@@ -122,8 +122,6 @@ export const Page = defineDocumentType(() => ({
   fields: {
     title: { type: "string", required: true },
     order: { type: "number", required: true },
-    descriptionEn: { type: "mdx", required: true },
-    descriptionJa: { type: "mdx", required: true },
     heroImages: { type: "list", of: Image, required: false },
   },
   computedFields: {

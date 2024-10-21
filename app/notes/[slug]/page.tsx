@@ -88,7 +88,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   return (
     <main>
-      <Header anchors={[{ label: "notes", href: "/notes" }]} />
+      <Header currentUrl={post.url} />
       {post.image && (
         <Card className="p-0 lg:py-0">
           <div className="w-full aspect-video relative">

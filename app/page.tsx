@@ -3,14 +3,20 @@
 import React from "react";
 import { allPages } from "contentlayer/generated";
 import Image from "next/image";
+import { notFound } from "next/navigation";
+import { getMDXComponent } from "next-contentlayer/hooks";
 
 import Header from "@/components/header";
-import PageNavigation from "@/components/page-navigation";
 import MultiImageCard from "@/components/multi-image-card";
+import { mdxComponents } from "@/components/mdx-components";
 
 export default function Home() {
   const pages = allPages.sort((a, b) => a.order - b.order);
   const page = pages.find((page) => page.slug === "home");
+
+  if (!page) notFound();
+
+  const MDXContent = getMDXComponent(page.body.code);
 
   return (
     <>
@@ -33,9 +39,9 @@ export default function Home() {
           </MultiImageCard>
         )}
 
-        {pages.map((page) => (
-          <PageNavigation key={page.slug} page={page} />
-        ))}
+        <div className="p-2.5 lg:p-5 ">
+          <MDXContent components={mdxComponents} />
+        </div>
       </main>
     </>
   );

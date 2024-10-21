@@ -4,7 +4,6 @@ import { getMDXComponent } from "next-contentlayer/hooks";
 
 import Header from "@/components/header";
 import { mdxComponents } from "@/components/mdx-components";
-import PageNavigation from "@/components/page-navigation";
 
 import { allPages } from "contentlayer/generated";
 
@@ -26,12 +25,9 @@ export default async function Page() {
 
   return (
     <>
-      <Header anchors={[{ label: "about", href: "/about" }]} />
+      <Header currentUrl="/about" />
       <main className="pt-5 lg:pt-10">
-        {pages.map((page) => (
-          <PageNavigation key={page.slug} page={page} showAboutLink={false} />
-        ))}
-        <div className="p-2.5 lg:p-5 mt-5 lg:mt-10">
+        <div className="p-2.5 lg:p-5">
           <MDXContent components={mdxComponents} />
         </div>
       </main>

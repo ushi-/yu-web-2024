@@ -80,7 +80,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   return (
     <main>
-      <Header anchors={[{ label: "projects", href: "/projects" }]} />
+      <Header currentUrl={post.url} />
       <Card className="p-0 lg:py-0">
         <div className="w-full aspect-video relative bg-foreground">
           {post.video ? (

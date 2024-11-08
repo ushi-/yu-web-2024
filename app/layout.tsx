@@ -81,7 +81,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "min-h-screen font-sans text-base flex flex-col max-w-screen-xl mx-auto",
+          "min-h-screen font-sans text-base flex flex-col max-w-screen-xl mx-auto selection:bg-stone-300",
           authentic.variable,
           authenticCondensed.variable
         )}
